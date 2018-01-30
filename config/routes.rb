@@ -7,11 +7,11 @@ Rails.application.routes.draw do
   
   get '/auth/:provider/callback', to: 'sessions#create'
 
-  resources :user do
-    resources :recipe 
+  resources :users do
+    resources :recipes 
   end
 
-  resources :ingredient
+  resources :ingredients
 
   # root
 end
