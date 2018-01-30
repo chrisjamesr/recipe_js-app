@@ -2,4 +2,9 @@
 
   <%= current_user.name %>
 
+<% else %>
+
+  <%= link_to "Sign Up", new_user_path %><br>
+  <%= link_to "Sign In", login_path %>
+
 <% end %>
