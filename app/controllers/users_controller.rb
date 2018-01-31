@@ -16,7 +16,7 @@ class UsersController < ApplicationController
   end
 
   def show
-
+    @recipes = @user.recipes
   end
 
   private
