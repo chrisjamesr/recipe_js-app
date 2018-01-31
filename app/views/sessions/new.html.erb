@@ -1,0 +1,5 @@
+<%= form_for(:user, :url => login_path) do |f| %>
+  <%= f.text_field :name, :placeholder => "Enter Your Name" %>
+  <%= f.text_field :password, :placeholder => "Enter Your Password" %>
+  <%= f.submit "Sign In" %>
+<% end %>
