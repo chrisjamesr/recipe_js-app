@@ -6,6 +6,10 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+FOOD_CATEGORIES = ['Appetizers', 'Desserts', 'Holiday Foods', 'Meat' 'Entres', 'Vegeterian', 'Vegan']
+FOOD_CATEGORIES.each do |category|
+    Category.create(name: category)
+end
 
 5.times do 
   User.create(
@@ -16,14 +20,26 @@
 end
 
 User.all.each do |user|
-  user.recipes.build ()  
+  user.recipes.create(
+    :title => Faker::Food.dish
+    :category_id => Category.all.sample
+    :description => Faker::Food.description
+    )  
 end
 
-FOOD_CATEGORIES = ['Appetizers', 'Desserts', 'Holiday Foods', 'Meat' 'Entres', 'Vegeterian', 'Vegan']
-FOOD_CATEGORIES.each do |category|
-    Category.create(title: category)
+10.times do
+  Ingredient.create(
+    :name => Faker::Food.ingredient
+    )
 end
 
+10.times do 
+  RecipeIngredient.create(
+    :recipe_id => Recipe.all.sample,
+    :ingredient_id => Ingredient.all.sample,
+    :quantity => Faker::Food.measurement
+    )
+end
 
 # counter = 1
 # Item.all.each do |item|
