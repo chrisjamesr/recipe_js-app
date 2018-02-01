@@ -23,9 +23,9 @@ end
 User.all.each do |user|
   user.recipes.create(
     :title => Faker::Food.dish,
-    :category_id => Category.all.sample,
+    :category_id => Category.all.sample.id,
     :description => Faker::Food.description
-    )  
+    )   
 end
 
 10.times do
@@ -36,8 +36,8 @@ end
 
 10.times do 
   RecipeIngredient.create(
-    :recipe_id => Recipe.all.sample,
-    :ingredient_id => Ingredient.all.sample,
+    :recipe_id => Recipe.all.sample.id,
+    :ingredient_id => Ingredient.all.sample.id,
     :quantity => Faker::Food.measurement
     )
 end
