@@ -8,19 +8,20 @@ class SessionsController < ApplicationController
     if auth
       @user = User.find_by(:email => auth[:info][:email])
       if @user
-        session[:user_id] = @user.id
+        set_session
         redirect_to @user, :notice => "Welcome #{@user.name.capitalize}"
       else
         @user = User.create(:email => auth[:info][:email]) do |user|
           user.name = auth[:info][:name]
           user.password = Password.pronounceable(10) 
         end
-        session[:user_id] = @user.id
+        set_session
+        redirect_to @user, :notice => "Welcome #{@user.name.capitalize}"
       end
     else
       @user = User.find_by(:name => params[:user][:name])
       if @user && @user.authenticate(params[:user][:password])
-        session[:user_id] = @user.id
+        set_session
         redirect_to @user, :notice => "Welcome #{@user.name.capitalize}"
       else
         flash[:alert] = @user.errors.full_messages
@@ -39,5 +40,6 @@ class SessionsController < ApplicationController
   def auth 
     request.env['omniauth.auth']
   end
+
 
 end
