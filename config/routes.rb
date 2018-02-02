@@ -10,11 +10,10 @@ Rails.application.routes.draw do
   
 
   resources :users do
-    resources :recipes, :shallow => true 
+    resources :recipes, only: [:index, :show, :new, :edit]
   end
-
-  resources :ingredients
-  resources :categories
+  resources :recipes, :ingredients, :categories
+  
 
   # root
 end
