@@ -5,7 +5,7 @@ class RecipesController < ApplicationController
   end
 
   def create
-
+    @recipe = current_user.recipe.build()
   end
 
   #show all recipes from all users or all recipes from single user
@@ -30,4 +30,9 @@ class RecipesController < ApplicationController
   def destroy
 
   end
+
+  private
+    def recipe_params
+      recipe.require(:recipe).permit(:name, :category_id, :ingredient_attributes)
+    end
 end
