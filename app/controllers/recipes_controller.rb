@@ -1,10 +1,18 @@
 class RecipesController < ApplicationController
 
   def new
-
+    if !logged_in?  
+      redirect_to root_path
+    elsif logged_in? && current_user == User.find(params[:user_id])
+      @recipe = Recipe.new(:user => current_user)
+    else
+      @recipe = Recipe.new(:user => current_user)
+      redirect_to new_user_recipe_path(current_user)
+    end
   end
 
   def create
+    raise params.inspect
     @recipe = current_user.recipe.build()
   end
 
