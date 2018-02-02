@@ -1,0 +1,12 @@
+<h1>Make a new Recipe</h1>
+
+<%= form_for(@recipe) do |f| %>
+  <%= f.hidden_field :user_id %>
+  <%= f.label :title%><br>
+  <%= f.text_field :title%><br>
+  <%= f.label "Approximate Cook Time (min)"%><br>
+  <%= f.number_field :time %><br>
+  <%= f.label :category %><br>
+  <%= f.select(:category, Category.all.collect {|c| [ c.name, c.id ] }, {prompt: 'Select Category'}) %>
+  <%= f.submit "Add Recipe" %>
+  <% end %>
