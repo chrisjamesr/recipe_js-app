@@ -1,5 +1,29 @@
 Recipe App.md
 
+Usage
+  Root
+    Sign Up
+    Log In w/pw
+    Log In w/Facebook
+    Log Out
+
+  User Show Page
+    Display User into
+     display user/recipes
+  User Index Page?
+  
+  Recipe Index Page
+    Display all most recent
+    filter recipes by User
+    filter recipes by Ingredients
+    filter recipes by Category
+    filter recipes by time  
+
+  Recipe Show Page
+    Recipe Title - Recipe Time
+    Recipe Description
+    Recipe Instructions (recipe_ingredient quantity, direction) 
+    
 Models
 
 User
