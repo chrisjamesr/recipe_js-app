@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'welcome#home'
+  root 'recipes#index'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   get '/auth/:provider/callback', to: 'sessions#create'
@@ -10,9 +10,9 @@ Rails.application.routes.draw do
   
 
   resources :users do
-    resources :recipes, only: [:index, :show, :new, :edit]
+    resources :recipes
   end
-  resources :recipes, :ingredients, :categories
+  resources :ingredients, :categories, :recipes, :only => [:index]
   
 
   # root
