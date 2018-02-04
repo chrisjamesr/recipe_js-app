@@ -1,3 +1,4 @@
 class RecipeCategory < ApplicationRecord
-  # NOT IN USE 
+  belongs_to :category
+  belongs_to :recipe
 end
