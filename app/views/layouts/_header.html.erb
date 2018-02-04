@@ -1,7 +1,9 @@
 <% if current_user %>
 
-  <%= current_user.name %>
-  <%= link_to "Logout", logout_path, :method => 'delete' %>
+  <%= current_user.name %>  -  
+  <%= link_to "My Recipes", user_recipes_path(current_user) %>  -  
+  <%= link_to "All Recipes", recipes_path %>  -  
+  <%= link_to "Logout", logout_path, :method => 'delete' %>  -  
 
 <% else %>
 
