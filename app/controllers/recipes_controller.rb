@@ -12,8 +12,12 @@ class RecipesController < ApplicationController
   end
 
   def create
-    @recipe = Recipe.create(recipe_params)
-    raise @recipe.inspect
+    if @recipe = Recipe.create(recipe_params)
+      redirect_to @recipe
+    else
+      render :new
+    end
+
   end
 
   #show all recipes from all users or all recipes from single user
@@ -23,7 +27,7 @@ class RecipesController < ApplicationController
 
   #show all recipe ionformation
   def show
-
+    @recipe = Recipe.find(params[:id])
   end
 
   def edit
@@ -47,7 +51,7 @@ class RecipesController < ApplicationController
         :category_ids => [], 
         :categories_attributes => [:name], 
         :ingredient_ids => [], 
-        :ingredients_attributes => [:name], 
+        :ingredients_attributes => [[:name], [:recipe_ingredients => [[:quantity],[:direction]]]]
         )
     end
 end
