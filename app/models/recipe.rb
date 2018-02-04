@@ -13,16 +13,19 @@ class Recipe < ApplicationRecord
   has_many :categories, :through => :recipe_categories
 
   def ingredients_attributes=(ingredients_attributes)
+
     ingredients_attributes.each do |i, ingredient_attribute|
       if ingredient_attribute.present?
-        ingredient = Ingredient.find_or_create_by(ingredient_attribute) 
+        ingredient = self.ingredients.build(:name => ingredient_attribute[:name]) 
         if !self.ingredients.include?(ingredient)
-        # self.categories. << category  will return entire collection
-          self.recipe_ingredients.build(:ingredient => ingredient)
-        # instantiates join model and passes in post/category
+          self.recipe_ingredients.build(
+            :ingredient => ingredient,
+            :quantity => ingredient_attribute[:recipe_ingredients][:quantity], 
+            :direction => ingredient_attribute[:recipe_ingredients][:direction]
+            )          
         end
       end
-    end
+    end    
   end
 
   def categories_attributes=(categories_attributes)
