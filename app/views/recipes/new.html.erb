@@ -7,6 +7,49 @@
   <%= f.label "Approximate Cook Time (min)"%><br>
   <%= f.number_field :time %><br>
   <%= f.label :category %><br>
-  <%= f.select(:category, Category.all.collect {|c| [ c.name, c.id ] }, {prompt: 'Select Category'}) %>
-  <%= f.submit "Add Recipe" %>
+  <%= f.collection_check_boxes(:category_ids, Category.all, :id, :name) %><br>
+  <%= f.fields_for :categories, @recipe.categories.build do |categories_fields| %>
+    <%= categories_fields.text_field :name, placeholder: "New Category" %><br />
+  <% end %><br><br>
+
+
+  <%#= f.fields_for :recipe_ingredients, @recipe.recipe_ingredients.build do |ingredient_fields| %>
+    <%#= ingredient_fields.collection_select(:ingredient, Ingredient.all, :id, :name, {prompt: 'Select Ingredient'}) %>
+    <%#= ingredient_fields.hidden_field :recipe_id, :value => @recipe.id %>
+    <%#= ingredient_fields.label "Quantity:  "%>
+    <%#= ingredient_fields.text_field :quantity %>
+    <%#= ingredient_fields.label "Directions: "%>
+    <%#= ingredient_fields.text_area :direction %>
+
+      <%#= ingredient_fields.collection_select(:ingredient, Ingredient.all, :id, :name, {prompt: 'Select Ingredient'}) %>
+    <%#= ingredient_fields.label "Quantity:  "%>
+    <%#= ingredient_fields.text_field :quantity %>
+    <%#= ingredient_fields.label "Directions: "%>
+    <%#= ingredient_fields.text_area :direction %>
+       <%#= ingredient_fields.collection_select(:ingredient, Ingredient.all, :id, :name, {prompt: 'Select Ingredient'}) %>
+    <%#= ingredient_fields.label "Quantity:  "%>
+    <%#= ingredient_fields.text_field :quantity %>
+    <%#= ingredient_fields.label "Directions: "%>
+    <%#= ingredient_fields.text_area :direction %><br>
+  <%# end %>
+
+  <%#= f.collection_check_boxes(:ingredient_attributes, Ingredient.all, :id, :name) do |i| %><br>
+    <%#= i.label(:"data-value" => i.value) { i.check_box + i.text } %>
+      <%#= fields_for i.object.recipe_ingredients.build do |r_i| %>
+        <%#= r_i.hidden_field :recipe_id, :value => "#{@recipe.id}" %>
+        <%#= r_i.hidden_field :ingredient_id %>
+        <%#= r_i.label :quantity%>
+        <%#= r_i.text_area :quantity %>
+      <%# end%>    
+  <%# end %><br>
+
+  <%# New Ingredient Text Field %>
+  <%= f.fields_for :ingredients, @recipe.ingredients.build do |ingredients_fields| %>
+    <%= ingredients_fields.text_field :name, placeholder: "New Ingredient" %><br />
   <% end %>
+
+ 
+
+  <%= f.submit %>
+  
+<% end %>
