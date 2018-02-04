@@ -5,13 +5,27 @@ class Recipe < ApplicationRecord
   has_many :ingredients, :through => :recipe_ingredients
 
   validates :title, presence: true, allow_blank: false
-  validates :category_id, presence: true, allow_blank: false
+  validates :title, uniqueness: true
+  
 
-  belongs_to :category
+  # belongs_to :category
   has_many :recipe_categories
   has_many :categories, :through => :recipe_categories
 
-  def ingredient_attributes
+  def ingredients_attributes=(ingredients_attributes)
+    ingredients_attributes.each do |i, ingredient_attribute|
+      if ingredient_attribute.present?
+        ingredient = Ingredient.find_or_create_by(ingredient_attribute) 
+        if !self.ingredients.include?(ingredient)
+        # self.categories. << category  will return entire collection
+          self.recipe_ingredients.build(:ingredient => ingredient)
+        # instantiates join model and passes in post/category
+        end
+      end
+    end
+  end
 
+  def categories_attributes=(categories_attributes)
+    
   end
 end
