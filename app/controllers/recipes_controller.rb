@@ -12,8 +12,8 @@ class RecipesController < ApplicationController
   end
 
   def create
-    raise params.inspect
-    @recipe = current_user.recipe.build()
+    @recipe = Recipe.create(recipe_params)
+    raise @recipe.inspect
   end
 
   #show all recipes from all users or all recipes from single user
@@ -41,6 +41,13 @@ class RecipesController < ApplicationController
 
   private
     def recipe_params
-      recipe.require(:recipe).permit(:name, :category_id, :ingredient_attributes)
+      params.require(:recipe).permit(
+        :user_id,
+        :title, 
+        :category_ids => [], 
+        :categories_attributes => [:name], 
+        :ingredient_ids => [], 
+        :ingredients_attributes => [:name], 
+        )
     end
 end
