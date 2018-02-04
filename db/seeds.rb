@@ -23,7 +23,6 @@ end
 User.all.each do |user|
   user.recipes.create(
     :title => Faker::Food.dish,
-    :category_id => Category.all.sample.id,
     :description => Faker::Food.description
     )   
 end
