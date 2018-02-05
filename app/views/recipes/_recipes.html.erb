@@ -1,6 +1,6 @@
 <%#= raise recipe.inspect %>
 <%# recipes.each do |recipe| %>
-  <h3><%= recipe.title %></h3>
+  <h3><%= link_to recipe.title, user_recipe_path(recipe.user, recipe) %></h3>
   <%= recipe.time %>
   <% recipe.recipe_ingredients.each do |recipe_ingredient| %>
     <%= recipe_ingredient.ingredient.name %> -  <%= recipe_ingredient.quantity %>  <%="  -  ";  recipe_ingredient.direction unless nil%>
