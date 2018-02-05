@@ -4,8 +4,8 @@
   <p><%= recipe.time %> Min</p>
   <ul>
   <% recipe.recipe_ingredients.each do |recipe_ingredient| %>
-    <li><%= recipe_ingredient.ingredient.name %> -  <%= recipe_ingredient.quantity %>  </li>
-  <li><%= recipe_ingredient.direction unless nil%></li>
+    <li><%= recipe_ingredient.ingredient.name %> -  <%= recipe_ingredient.quantity %>  -  <%= recipe_ingredient.preparation unless nil%></li>
+  
   <% end %>
   </ul>
   <br>
