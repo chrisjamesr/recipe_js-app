@@ -23,9 +23,9 @@ class RecipesController < ApplicationController
   #show all recipes from all users or all recipes from single user
   def index
     if params[:user_id]
-      render :index, :locals => {:recipes => current_user.recipes}
+      @recipes = Recipe.where(:user_id => params[:user_id])
     else
-      render :index,  @recipes = Recipe.all
+      @recipes = Recipe.all
     end
   end
 
