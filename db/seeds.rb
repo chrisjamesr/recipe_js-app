@@ -41,7 +41,7 @@ end
     :recipe_id => Recipe.all.sample.id,
     :ingredient_id => Ingredient.all.sample.id,
     :quantity => Faker::Food.measurement,
-    :direction => PREP_DIRECTIONS.sample
+    :preparation => PREP_DIRECTIONS.sample
     )
 end
 
@@ -53,24 +53,3 @@ end
   end
 end
 
-# counter = 1
-# Item.all.each do |item|
-#   item.category_id = counter
-#   item.save
-#   counter += 1
-# end
-
-# # User.create(name: 'Alex', email:'alex@home.com')
-# 10.times do 
-#   User.create(
-#   :name => Faker::Name.name,    
-#   :password => Devise.friendly_token.first(8),
-#   :email => Faker::Internet.email 
-#   ) 
-# end
-
-# User.all do |user|
-#   Cart.create(:user => user) do |cart|
-#     cart.line_items.build(:item => Item.first, :quantity =>1)
-#   end
-# end
