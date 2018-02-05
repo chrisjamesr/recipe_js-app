@@ -22,7 +22,6 @@ class Recipe < ApplicationRecord
             :quantity => ingredient_attribute[:recipe_ingredients][:quantity], 
             :preparation => ingredient_attribute[:recipe_ingredients][:preparation]
           )     
-        # binding.pry   
         # else
         #   recipe_ingredient = self.recipe_ingredients.find_by(:ingredient_id => ingredient.id, :recipe_id => self.id)
         #   recipe_ingredient.update(
