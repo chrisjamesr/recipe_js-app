@@ -6,21 +6,23 @@
   <%= f.number_field :time %><br><br>
   <%= f.label :description %>
   <%= f.text_area :description, cols: 40, rows: 6 %><br><br>
+  <%= f.label :directions %>
+  <%= f.text_area :directions, cols: 40, rows: 6 %><br>
   <%= f.label :ingredients %><br>
   <%= f.fields_for :ingredients, recipe.ingredients.build do |ingredients_fields| %>
     <%= ingredients_fields.label "New Ingredient:  " %>
     <%= ingredients_fields.text_field :name, placeholder: "Ingredient Name" %>  -  
       <%= ingredients_fields.fields_for :recipe_ingredients, recipe.recipe_ingredients.build do |recipe_ingredient| %>
-        <%= recipe_ingredient.text_field :quantity, :placeholder => "Quantiy" %>  -  
-        <%= recipe_ingredient.text_field :direction, :placeholder => "Directions" %><br>
+        <%= recipe_ingredient.text_field :quantity, :placeholder => "Quantity" %>  -  
+        <%= recipe_ingredient.text_field :preparation, :placeholder => "Preparation" %><br>
     <% end %>
   <% end %>
     <%= f.fields_for :ingredients, recipe.ingredients.build do |ingredients_fields| %>
     <%= ingredients_fields.label "New Ingredient:  " %>
     <%= ingredients_fields.text_field :name, placeholder: "Ingredient Name" %>  -  
       <%= ingredients_fields.fields_for :recipe_ingredients, recipe.recipe_ingredients.build do |recipe_ingredient| %>
-        <%= recipe_ingredient.text_field :quantity, :placeholder => "Quantiy" %>  -  
-        <%= recipe_ingredient.text_field :direction, :placeholder => "Directions" %><br>
+        <%= recipe_ingredient.text_field :quantity, :placeholder => "Quantity" %>  -  
+        <%= recipe_ingredient.text_field :preparation, :placeholder => "Preparation" %><br>
     <% end %>
   <% end %>
   <br><br>
