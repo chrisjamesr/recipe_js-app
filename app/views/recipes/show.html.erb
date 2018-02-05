@@ -2,3 +2,10 @@
 
 <p> Approximate Cook Time:  <%= @recipe.time %> Min </p>
 <p><em> <%= @recipe.description %></em></p>
+<ul>
+  <% @recipe.recipe_ingredients.each do |recipe_ingredient| %>
+    <li> <%= recipe_ingredient.ingredient.name %> - <%=recipe_ingredient.quantity %> - <%= recipe_ingredient.preparation %></li>
+    <br>
+  <% end %>
+</ul>
+<p> <%= @recipe.directions %></p>
