@@ -13,7 +13,7 @@ class RecipesController < ApplicationController
 
   def create
     if @recipe = Recipe.create(recipe_params)
-      redirect_to @recipe
+      redirect_to user_recipe_path(@recipe)
     else
       render :new
     end
