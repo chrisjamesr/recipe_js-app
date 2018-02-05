@@ -1,4 +1,5 @@
 class RecipesController < ApplicationController
+  before_action :set_recipe!, :only => [:show, :edit, :update]
 
   def new
     if !logged_in?  
@@ -31,11 +32,11 @@ class RecipesController < ApplicationController
 
   #show all recipe ionformation
   def show
-    @recipe = Recipe.find(params[:id])
+    
   end
 
   def edit
-
+    
   end
 
 # protected methods
@@ -54,10 +55,15 @@ class RecipesController < ApplicationController
         :title, 
         :time,
         :description,
+        :directions,
         :category_ids => [], 
         :categories_attributes => [:name], 
         :ingredient_ids => [], 
-        :ingredients_attributes => [[:name], [:recipe_ingredients => [[:quantity],[:direction]]]]
+        :ingredients_attributes => [[:name], [:recipe_ingredients => [[:quantity],[:preparation]]]]
         )
+    end
+
+    def set_recipe!
+      @recipe = Recipe.find(params[:id])
     end
 end
