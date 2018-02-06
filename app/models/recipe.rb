@@ -16,18 +16,17 @@ class Recipe < ApplicationRecord
     ingredients_attributes.each do |i, ingredient_attribute|
       if ingredient_attribute.present?
         ingredient = Ingredient.find_or_create_by(:name => ingredient_attribute[:name]) 
-        if !self.ingredients.include?(ingredient)
+        if !self.ingredients.include?(ingredient) && ingredient.valid?
           self.recipe_ingredients.build(
             :ingredient => ingredient,
             :quantity => ingredient_attribute[:recipe_ingredients][:quantity], 
             :preparation => ingredient_attribute[:recipe_ingredients][:preparation]
           )     
-        # else
-        #   recipe_ingredient = self.recipe_ingredients.find_by(:ingredient_id => ingredient.id, :recipe_id => self.id)
-        #   recipe_ingredient.update(
-        #     :quantity => ingredient_attribute[:recipe_ingredients][:quantity], 
-        #     :preparation => ingredient_attribute[:recipe_ingredients][:preparation]
-        #     )
+        elsif recipe_ingredient = self.recipe_ingredients.find_by(:ingredient_id => ingredient.id, :recipe_id => self.id)
+          recipe_ingredient.update(
+          :quantity => ingredient_attribute[:recipe_ingredients][:quantity], 
+          :preparation => ingredient_attribute[:recipe_ingredients][:preparation]
+          )
         end 
       end
     end    
