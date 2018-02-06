@@ -1,4 +1,4 @@
-<%= form_for @recipe, :url => user_recipes_path(current_user) do |f| %>
+<%= form_for([@user, @recipe]) do |f| %>
   <%= f.hidden_field :user_id %>
   <%= f.label :title%><br>
   <%= f.text_field :title%><br>
