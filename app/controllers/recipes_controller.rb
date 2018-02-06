@@ -4,7 +4,7 @@ class RecipesController < ApplicationController
 
   def new
     if !logged_in?  
-      redirect_to root_path
+      redirect_to root_path         # is this necessary?   
     elsif logged_in? && current_user == User.find(params[:user_id])
       @recipe = Recipe.new(:user => current_user)
     else
@@ -14,9 +14,11 @@ class RecipesController < ApplicationController
   end
 
   def create
-    if @recipe = Recipe.create(recipe_params)
+    @recipe = Recipe.new(recipe_params)
+    if @recipe.save
       redirect_to user_recipe_path(@recipe.user, @recipe)
     else
+      flash[:alert] = @recipe.errors.full_messages
       render :new
     end
 
@@ -31,16 +33,17 @@ class RecipesController < ApplicationController
     end
   end
 
-  #show all recipe ionformation
+  #show all recipe information
   def show
     
   end
 
+# protected actions
   def edit
     
   end
 
-# protected methods
+
   def update
     @recipe = Recipe.find(params[:id])
     @recipe.update(recipe_params)
