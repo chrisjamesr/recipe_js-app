@@ -1,5 +1,6 @@
 class RecipesController < ApplicationController
-  before_action :set_recipe!, :only => [:show, :edit, :update]
+  before_action :set_recipe!, :only => [:show, :edit]
+  before_action :current_user, :only => [:show, :edit]
 
   def new
     if !logged_in?  
@@ -41,7 +42,9 @@ class RecipesController < ApplicationController
 
 # protected methods
   def update
-
+    @recipe = Recipe.find(params[:id])
+    @recipe.update(recipe_params)
+    redirect_to user_recipe_path(@recipe)
   end
 
   def destroy
