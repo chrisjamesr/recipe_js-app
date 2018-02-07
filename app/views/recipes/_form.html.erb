@@ -7,24 +7,11 @@
   <%= f.label :description %>
   <%= f.text_area :description, cols: 40, rows: 6 %><br><br>
   <%= f.label :directions %>
-  <%= f.text_area :directions, cols: 40, rows: 6 %><br>
-  <%= f.label :ingredients %><br>
-  <%= f.fields_for :ingredients, recipe.ingredients.build do |ingredients_fields| %>
-    <%= ingredients_fields.label "New Ingredient:  " %>
-    <%= ingredients_fields.text_field :name, placeholder: "Ingredient Name" %>  -  
-      <%= ingredients_fields.fields_for :recipe_ingredients, recipe.recipe_ingredients.build do |recipe_ingredient| %>
-        <%= recipe_ingredient.text_field :quantity, :placeholder => "Quantity" %>  -  
-        <%= recipe_ingredient.text_field :preparation, :placeholder => "Preparation" %><br>
-    <% end %>
-  <% end %>
-    <%= f.fields_for :ingredients, recipe.ingredients.build do |ingredients_fields| %>
-    <%= ingredients_fields.label "New Ingredient:  " %>
-    <%= ingredients_fields.text_field :name, placeholder: "Ingredient Name" %>  -  
-      <%= ingredients_fields.fields_for :recipe_ingredients, recipe.recipe_ingredients.build do |recipe_ingredient| %>
-        <%= recipe_ingredient.text_field :quantity, :placeholder => "Quantity" %>  -  
-        <%= recipe_ingredient.text_field :preparation, :placeholder => "Preparation" %><br>
-    <% end %>
-  <% end %>
+  <%= f.text_area :directions, cols: 40, rows: 6 %><br><br>
+  <%= f.label :ingredients %><br><br>
+
+  <%= render :partial => "ingredients/ingredient", :locals => {:recipe => @recipe, :f => f} %>
+  
   <br><br>
   <%= f.label :categories %><br>
   <%= f.collection_check_boxes(:category_ids, Category.all, :id, :name) %><br>
