@@ -4,8 +4,8 @@
 <p><em> <%= @recipe.description %></em></p>
 <ul>
   <% @recipe.recipe_ingredients.each do |recipe_ingredient| %>
-    <li> <%= recipe_ingredient.ingredient.name %> - <%=recipe_ingredient.quantity %> - <%= recipe_ingredient.preparation %></li>
-    <br>
+    <li> <%= recipe_ingredient.ingredient.name %> - <%=recipe_ingredient.quantity %>  <%= recipe_ingredient.preparation %></li>
+    
   <% end %>
 </ul>
 <p> <%= @recipe.directions %></p>
