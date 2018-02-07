@@ -4,7 +4,7 @@ class Recipe < ApplicationRecord
   has_many :recipe_ingredients
   has_many :ingredients, :through => :recipe_ingredients
 
-  validates :title, presence: true, allow_blank: false
+  validates :title, :description, :directions, presence: true, allow_blank: false
   validates :title, uniqueness: true
   
 
