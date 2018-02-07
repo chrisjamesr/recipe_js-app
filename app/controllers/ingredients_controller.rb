@@ -1,13 +1,8 @@
 class IngredientsController < ApplicationController
 
-  #create ingredient from recipe page 
-  def create
-
+  def index
+    #show available ingredients?
   end
 
-  #show list of recipes using an ingredient
-  def show
-
-  end
 
 end
