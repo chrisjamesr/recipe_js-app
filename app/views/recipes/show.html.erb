@@ -9,3 +9,7 @@
   <% end %>
 </ul>
 <p> <%= @recipe.directions %></p>
+<p>
+  <%= show_edit_and_delete_buttons %>
+  <%#= button_to "Edit", list_item_path(item.list, item), :method => "delete", :class => "destroy" %>
+</p>
