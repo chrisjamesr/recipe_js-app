@@ -21,40 +21,4 @@
   <%= f.submit %>
 <% end %>
 
-  <%#= f.fields_for :recipe_ingredients, @recipe.recipe_ingredients.build do |ingredient_fields| %>
-    <%#= ingredient_fields.collection_select(:ingredient, Ingredient.all, :id, :name, {prompt: 'Select Ingredient'}) %>
-    <%#= ingredient_fields.hidden_field :recipe_id, :value => @recipe.id %>
-    <%#= ingredient_fields.label "Quantity:  "%>
-    <%#= ingredient_fields.text_field :quantity %>
-    <%#= ingredient_fields.label "Directions: "%>
-    <%#= ingredient_fields.text_area :direction %>
-
-      <%#= ingredient_fields.collection_select(:ingredient, Ingredient.all, :id, :name, {prompt: 'Select Ingredient'}) %>
-    <%#= ingredient_fields.label "Quantity:  "%>
-    <%#= ingredient_fields.text_field :quantity %>
-    <%#= ingredient_fields.label "Directions: "%>
-    <%#= ingredient_fields.text_area :direction %>
-       <%#= ingredient_fields.collection_select(:ingredient, Ingredient.all, :id, :name, {prompt: 'Select Ingredient'}) %>
-    <%#= ingredient_fields.label "Quantity:  "%>
-    <%#= ingredient_fields.text_field :quantity %>
-    <%#= ingredient_fields.label "Directions: "%>
-    <%#= ingredient_fields.text_area :direction %>
-  <%# end %>
-
-  <%#= f.collection_check_boxes(:ingredient_attributes, Ingredient.all, :id, :name) do |i| %>
-    <%#= i.label(:"data-value" => i.value) { i.check_box + i.text } %>
-      <%#= fields_for i.object.recipe_ingredients.build do |r_i| %>
-        <%#= r_i.hidden_field :recipe_id, :value => "#{@recipe.id}" %>
-        <%#= r_i.hidden_field :ingredient_id %>
-        <%#= r_i.label :quantity%>
-        <%#= r_i.text_area :quantity %>
-      <%# end%>    
-  <%# end %>
-
-  <%# New Ingredient Text Field %>
-  
-
  
-
-  
-  
