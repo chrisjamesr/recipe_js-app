@@ -11,7 +11,7 @@
   <%= f.label :ingredients %><br><br>
 
   <%= render :partial => "ingredients/ingredient", :locals => {:recipe => @recipe, :f => f} %>
-  
+
   <br><br>
   <%= f.label :categories %><br>
   <%= f.collection_check_boxes(:category_ids, Category.all, :id, :name) %><br>
@@ -19,6 +19,4 @@
     <%= categories_fields.text_field :name, placeholder: "New Category" %><br />
   <% end %><br><br>
   <%= f.submit %>
-<% end %>
-
- 
+<% end %> 
