@@ -1,13 +1,11 @@
-<%#= raise recipe.inspect %>
-<%# recipes.each do |recipe| %>
   <h3><%= link_to recipe.title, user_recipe_path(recipe.user, recipe) %></h3>
-  <p><%= recipe.time %> Min</p>
+  <em>Submitted by <%= link_to recipe.user.name, user_recipes_path(recipe.user) %></em><br>
+  Approximate Cook Time: <%= recipe.time %> Min
   <ul>
-  <% recipe.recipe_ingredients.each do |recipe_ingredient| %>
-    <li><%= recipe_ingredient.ingredient.name %> -  <%= recipe_ingredient.quantity %>  -  <%= recipe_ingredient.preparation unless nil%></li>
-  
-  <% end %>
+    <% recipe.recipe_ingredients.each do |recipe_ingredient| %>
+      <li><%= recipe_ingredient.ingredient.name %> -  <%= recipe_ingredient.quantity %>  -  <%= recipe_ingredient.preparation unless nil%></li>
+    <% end %>
   </ul>
   <br>
-<%# end %>
+
 
