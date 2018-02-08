@@ -1,2 +1,9 @@
 <%=display_user_name %>
+
+ <%= form_tag("/recipes", method: "get") do %>
+    <%= select_tag "ingredient", options_from_collection_for_select(@ingredients, "id", "name"), include_blank: true %>
+    <%#= select_tag "date", options_for_select(["Today", "Old News"]), include_blank: true %>
+    <%= submit_tag "Filter" %>
+    <% end %>
+
 <%= render :partial => "recipes", :collection => @recipes, :as => :recipe %>
