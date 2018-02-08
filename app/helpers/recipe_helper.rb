@@ -1,7 +1,13 @@
 module RecipeHelper
 
   def recipe_new_or_edit(recipe)
-    recipe.new_record? ? recipe.ingredients.build : recipe.ingredients
+    if recipe.new_record? 
+      recipe.ingredients.build
+    elsif recipe.persisted? && recipe.ingredients.empty?
+     recipe.ingredients.build
+    else 
+      recipe.ingredients 
+    end 
   end
 
   def show_edit_link
