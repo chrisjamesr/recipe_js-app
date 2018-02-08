@@ -1,7 +1,7 @@
 class RecipesController < ApplicationController
   before_action :set_recipe!, :only => [:show, :edit]
   before_action :current_user, :only => [:show, :edit]
-  before_action :has_permission?, :only =>[:edit, :update, :destroy]
+  # before_action :has_permission?, :only =>[:edit, :update, :destroy]
 
   def new
     if !logged_in?  
@@ -48,7 +48,7 @@ class RecipesController < ApplicationController
   def update
     @recipe = Recipe.find(params[:id])
     @recipe.update(recipe_params)
-    redirect_to user_recipe_path(@recipe)
+    redirect_to user_recipe_path(current_user, @recipe)
   end
 
   def destroy
