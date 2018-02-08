@@ -27,6 +27,7 @@ class RecipesController < ApplicationController
 
   #show all recipes from all users or all recipes from single user
   def index
+    @ingredients = Ingredient.all
     if params[:user_id]
       @recipes = Recipe.where(:user_id => params[:user_id])
     else
