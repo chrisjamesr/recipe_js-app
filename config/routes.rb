@@ -10,11 +10,11 @@ Rails.application.routes.draw do
   
 
   resources :users do
-    resources :recipes
+    resources :recipes 
   end
   resources :ingredients, :categories, :recipes, :only => [:index]
 
-  delete 'users/:id/recipe/:id', :to => 'recipe_ingredients#destroy'
+  delete '/recipes/:id/recipe_ingredients/:id', :to => 'recipe_ingredients#destroy', :as => :remove_ingredient
 
   # root
 end
