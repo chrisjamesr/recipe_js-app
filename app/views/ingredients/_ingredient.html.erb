@@ -3,11 +3,13 @@
   <div>
     <%= f.fields_for :ingredients, recipe_new_or_edit(recipe) do |ingredients_fields| %>
       <p>
-        <%= ingredients_fields.text_field :name, placeholder: "Ingredient Name" %>  -  
-        <%= ingredients_fields.fields_for :recipe_ingredients, recipe_ingredient_new_or_edit(recipe, ingredients_fields.object) do |recipe_ingredient| %>
-          <%= recipe_ingredient.text_field :quantity, :placeholder => "Quantity" %>  -  
-          <%= recipe_ingredient.text_field :preparation, :placeholder => "Preparation" %>
-        <% end %>
+        <li>
+          <%= ingredients_fields.text_field :name, placeholder: "Ingredient Name" %>  -  
+          <%= ingredients_fields.fields_for :recipe_ingredients, recipe_ingredient_new_or_edit(recipe, ingredients_fields.object) do |recipe_ingredient| %>
+            <%= recipe_ingredient.text_field :quantity, :placeholder => "Quantity" %>  -  
+            <%= recipe_ingredient.text_field :preparation, :placeholder => "Preparation" %>
+          <% end %>
+        </li>
       </p>
     <% end %>
   </div>
