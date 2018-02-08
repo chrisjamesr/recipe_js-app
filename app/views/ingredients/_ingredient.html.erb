@@ -8,7 +8,9 @@
           <%= ingredients_fields.fields_for :recipe_ingredients, recipe_ingredient_new_or_edit(recipe, ingredients_fields.object) do |recipe_ingredient| %>
             <%= recipe_ingredient.text_field :quantity, :placeholder => "Quantity" %>  -  
             <%= recipe_ingredient.text_field :preparation, :placeholder => "Preparation" %>
+            <%= link_to "x", remove_ingredient_path(recipe_ingredient.object), :method => "delete"%> 
           <% end %>
+             
         </li>
       </p>
     <% end %>
