@@ -13,7 +13,8 @@ Rails.application.routes.draw do
     resources :recipes
   end
   resources :ingredients, :categories, :recipes, :only => [:index]
-  
+
+  delete 'users/:id/recipe/:id', :to => 'recipe_ingredients#destroy'
 
   # root
 end
