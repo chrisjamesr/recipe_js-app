@@ -9,7 +9,7 @@ module UserHelper
   end
 
   def display_user_name
-    if nested_route?
+    if nested_route? && !current_user_path?
       @user = User.find_by(:id => request.parameters[:user_id]) 
       @user.name
     end
