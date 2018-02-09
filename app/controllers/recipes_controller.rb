@@ -17,7 +17,7 @@ class RecipesController < ApplicationController
   def create
     @recipe = Recipe.new(recipe_params)
     if @recipe.save
-      redirect_to user_recipe_path(@recipe.user, @recipe)
+      redirect_to user_recipe_path(@recipe.user, @recipe), {:notice => "Success! New Recipe Added."}
     else
       flash[:alert] = @recipe.errors.full_messages
       render :new
@@ -26,8 +26,7 @@ class RecipesController < ApplicationController
   end
 
   #show all recipes from all users or all recipes from single user
-  def index
-    @ingredients = Ingredient.all
+  def index   
     if params[:user_id]
       @recipes = Recipe.where(:user_id => params[:user_id])
     else
