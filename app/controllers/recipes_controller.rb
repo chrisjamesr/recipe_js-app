@@ -1,7 +1,7 @@
 class RecipesController < ApplicationController
   before_action :set_recipe!, :only => [:show, :edit]
   before_action :current_user, :only => [:show, :edit]
-  # before_action :has_permission?, :only =>[:edit, :update, :destroy]
+  before_action :has_permission?, :only =>[:edit, :update, :destroy]
 
   def new
     if !logged_in?  
@@ -42,7 +42,7 @@ class RecipesController < ApplicationController
 
 # protected actions
   def edit
-    
+
   end
 
 
