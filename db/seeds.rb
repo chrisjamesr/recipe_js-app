@@ -8,11 +8,12 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 FOOD_CATEGORIES = ['Appetizers', 'Desserts', 'Holiday Foods', 'Meat', 'Entres', 'Vegeterian', 'Vegan', 'Breakfast']
 PREP_DIRECTIONS =['Chopped', 'Diced', 'Grated', 'Sliced']
+
 FOOD_CATEGORIES.each do |category|
     Category.create(name: category)
 end
 
-5.times do 
+10.times do 
   User.create(
     name: Faker::Name.name,
     email: Faker::Internet.email,
@@ -20,23 +21,23 @@ end
   )
 end
 
-2.times do
+4.times do
   User.all.each do |user|
     user.recipes.create(
       :title => Faker::Food.dish,
       :description => Faker::Food.description,
-      :time => Faker::Number.between(1, 90) 
+      :time => Faker::Number.between(1, 90),
+      :directions => Faker::TheFreshPrinceOfBelAir.quote 
       )   
   end
 end
 
-15.times do
+20.times do
   Ingredient.create(
     :name => Faker::Food.ingredient
     )
 end
-
-20.times do 
+60.times do 
   RecipeIngredient.create(
     :recipe_id => Recipe.all.sample.id,
     :ingredient_id => Ingredient.all.sample.id,
@@ -45,7 +46,7 @@ end
     )
 end
 
-2.times do
+4.times do
   Recipe.all.each do |recipe|
     recipe.recipe_categories.create(
       :category_id => Category.all.sample.id
