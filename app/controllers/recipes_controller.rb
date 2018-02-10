@@ -27,10 +27,14 @@ class RecipesController < ApplicationController
 
   #show all recipes from all users or all recipes from single user
   def index   
+    # raise params.inspect
+    @ingredients = Ingredient.all.order(:name)
+    @categories = Category.all.all.order(:name)
     if params[:user_id]
       @recipes = Recipe.where(:user_id => params[:user_id])
     else
-      @recipes = Recipe.all
+     @recipes = Recipe.filter_options(params)
+    
     end
   end
 
@@ -73,4 +77,6 @@ class RecipesController < ApplicationController
     def set_recipe!
       @recipe = Recipe.find(params[:id])
     end
+
+
 end
