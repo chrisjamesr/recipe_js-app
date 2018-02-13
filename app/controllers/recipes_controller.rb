@@ -1,7 +1,9 @@
 class RecipesController < ApplicationController
   before_action :set_recipe!, :only => [:show, :edit]
+  before_action :set_categories_ingredients, :only => [:index, :newest, :oldest] 
   before_action :current_user, :only => [:show, :edit]
   before_action :has_permission?, :only =>[:edit, :update, :destroy]
+
 
   def new
     if !logged_in?  
@@ -27,8 +29,7 @@ class RecipesController < ApplicationController
 
   #show all recipes from all users or all recipes from single user
   def index   
-    @ingredients = Ingredient.all.order(:name)
-    @categories = Category.all.all.order(:name)
+    
     if params[:user_id]
       @recipes = Recipe.where(:user_id => params[:user_id])
     else
@@ -56,6 +57,16 @@ class RecipesController < ApplicationController
   def destroy
 
   end
+    
+  def newest
+    @recipes = Recipe.newest
+    render :index
+  end
+
+  def oldest
+    @recipes = Recipe.oldest
+    render :index
+  end
 
   private
     def recipe_params
@@ -76,5 +87,9 @@ class RecipesController < ApplicationController
       @recipe = Recipe.find(params[:id])
     end
 
+    def set_categories_ingredients
+      @ingredients = Ingredient.all.order(:name)
+      @categories = Category.all.order(:name)
+    end
 
 end
