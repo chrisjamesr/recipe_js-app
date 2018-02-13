@@ -16,8 +16,11 @@ class Recipe < ApplicationRecord
     joins(:recipe_categories)
     .where("recipe_categories.category_id = ?", category_id)
   }
-  scope :newest, -> {order(:created_at => :desc)}
-  scope :oldest, -> {order(:created_at => :asc)}
+  scope :newest, ->{order(:created_at => :desc)}
+  scope :oldest, ->{order(:created_at => :asc)}
+  scope :shortest, ->{order(:time => :asc)}
+  scope :longest, ->{order(:time => :desc)}
+  
 
   def ingredients_attributes=(ingredients_attributes)
     ingredients_attributes.each do |i, ingredient_attribute|
