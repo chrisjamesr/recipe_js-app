@@ -1,13 +1,21 @@
 class Recipe < ApplicationRecord
   belongs_to :user
-
   has_many :recipe_ingredients, :dependent => :destroy
   has_many :ingredients, :through => :recipe_ingredients
-  validates :title, :description, :directions, presence: true, allow_blank: false
-  validates :title, uniqueness: true
-    # belongs_to :category
   has_many :recipe_categories
   has_many :categories, :through => :recipe_categories
+
+  validates :title, :description, :directions, presence: true, allow_blank: false
+  validates :title, uniqueness: true
+
+  scope :by_ingredient,  ->(ingredient_id) {
+    joins(:recipe_ingredients).where("recipe_ingredients.ingredient_id = ?", ingredient_id)
+  }
+  scope :by_category, ->(category_id) {
+    joins(:recipe_categories).where("recipe_categories.category_id = ?", category_id)
+  }
+  scope :newest, -> { order(:created_at => :desc)}
+  scope :oldest, -> {order(:created_at => :asc)}
 
   def ingredients_attributes=(ingredients_attributes)
     ingredients_attributes.each do |i, ingredient_attribute|
@@ -28,6 +36,7 @@ class Recipe < ApplicationRecord
       end
     end    
   end
+
 
   def categories_attributes=(categories_attributes)
     categories_attributes.each do |i, category_attribute|
