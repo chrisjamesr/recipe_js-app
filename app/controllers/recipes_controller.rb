@@ -33,8 +33,7 @@ class RecipesController < ApplicationController
     if params[:user_id]
       @recipes = Recipe.where(:user_id => params[:user_id])
     else
-     @recipes = Recipe.filter_options(params)
-    
+     @recipes = Recipe.filter_options(params)    
     end
   end
 
