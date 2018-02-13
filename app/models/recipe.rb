@@ -6,15 +6,17 @@ class Recipe < ApplicationRecord
   has_many :categories, :through => :recipe_categories
 
   validates :title, :description, :directions, presence: true, allow_blank: false
-  validates :title, uniqueness: true
+  validates :title, :uniqueness => {:case_sensitive => false}
 
   scope :by_ingredient,  ->(ingredient_id) {
-    joins(:recipe_ingredients).where("recipe_ingredients.ingredient_id = ?", ingredient_id)
+    joins(:recipe_ingredients)
+    .where("recipe_ingredients.ingredient_id = ?", ingredient_id)
   }
   scope :by_category, ->(category_id) {
-    joins(:recipe_categories).where("recipe_categories.category_id = ?", category_id)
+    joins(:recipe_categories)
+    .where("recipe_categories.category_id = ?", category_id)
   }
-  scope :newest, -> { order(:created_at => :desc)}
+  scope :newest, -> {order(:created_at => :desc)}
   scope :oldest, -> {order(:created_at => :asc)}
 
   def ingredients_attributes=(ingredients_attributes)
@@ -42,6 +44,7 @@ class Recipe < ApplicationRecord
     categories_attributes.each do |i, category_attribute|
       if category_attribute.present?
         category = Category.find_or_create_by(category_attribute)
+        raise category.inspect
         if self.categories.include?(category)
           self.recipe_categories.build(:category => category)
         end
@@ -53,26 +56,13 @@ class Recipe < ApplicationRecord
     if params[:ingredient_id].nil? && params[:category_id].nil?
       Recipe.all
     elsif params[:ingredient_id].present? && params[:category_id].present?
-      filter_by_category_and_ingredient(params[:ingredient_id], params[:category_id])
+      Recipe.by_ingredient(params[:ingredient_id]).by_category(params[:category_id])
     elsif params[:category_id].present? && params[:ingredient_id].empty?
-      filter_by_category(params[:category_id])
+      Recipe.by_category(params[:category_id])
     elsif params[:ingredient_id].present? && params[:category_id].empty?
-      filter_by_ingredient(params[:ingredient_id])
+      Recipe.by_ingredient(params[:ingredient_id])
     end
   
   end
-
-  def self.filter_by_category(category_id)
-    joins(:recipe_categories).where("recipe_categories.category_id = ?", category_id)
-  end
-
-   def self.filter_by_ingredient(ingredient_id)
-    joins(:recipe_ingredients).where("recipe_ingredients.ingredient_id = ?", ingredient_id)
-  end
-
-   def self.filter_by_category_and_ingredient(category_id, ingredient_id)
-    joins(:recipe_ingredients, :recipe_categories).where("recipe_ingredients.ingredient_id = ? AND recipe_categories.category_id = ?", ingredient_id, category_id)
-  end
-
 
 end
