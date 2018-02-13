@@ -44,7 +44,6 @@ class Recipe < ApplicationRecord
     categories_attributes.each do |i, category_attribute|
       if category_attribute.present?
         category = Category.find_or_create_by(category_attribute)
-        raise category.inspect
         if self.categories.include?(category)
           self.recipe_categories.build(:category => category)
         end
