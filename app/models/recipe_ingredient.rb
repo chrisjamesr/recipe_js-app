@@ -6,8 +6,11 @@ class RecipeIngredient < ApplicationRecord
 
   
   def recipe_ingredient_unique
-    if RecipeIngredient.where(recipe_id: self.recipe_id, ingredient_id: self.ingredient_id).exists?
+    if RecipeIngredient.where(recipe_id: self.recipe_id, ingredient_id: self.ingredient_id).exists? && self.new_record?
       self.errors[:base] << "This ingredient already exists"
     end
   end
+
+
+
 end
