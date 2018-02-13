@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :ingredients, :categories, :recipes, :only => [:index]
 
   delete '/recipes/:id/recipe_ingredients/:id', :to => 'recipe_ingredients#destroy', :as => :remove_ingredient
-
+  get '/recipes/newest' => 'recipes#newest'
+  get '/recipes/oldest' => 'recipes#oldest'
   # root
 end
