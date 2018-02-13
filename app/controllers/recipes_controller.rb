@@ -67,6 +67,16 @@ class RecipesController < ApplicationController
     render :index
   end
 
+  def shortest
+    @recipes = Recipe.shortest
+    render :index
+  end
+
+  def longest
+    @recipes = Recipe.longest
+    render :index
+  end
+  
   private
     def recipe_params
       params.require(:recipe).permit(
