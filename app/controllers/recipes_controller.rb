@@ -27,7 +27,6 @@ class RecipesController < ApplicationController
 
   #show all recipes from all users or all recipes from single user
   def index   
-    # raise params.inspect
     @ingredients = Ingredient.all.order(:name)
     @categories = Category.all.all.order(:name)
     if params[:user_id]
