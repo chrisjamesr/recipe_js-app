@@ -1,4 +1,6 @@
-<%= form_for(:user, :url => login_path) do |f| %>
+<h1>Sign In!</h1>
+
+<%= form_for(:user, :url => login_path, html: { :class => "form-horizontal"}) do |f| %>
   <%= f.text_field :name, :placeholder => "Enter Your Name" %>
   <%= f.text_field :password, :placeholder => "Enter Your Password" %>
   <%= f.submit "Sign In" %>
