@@ -17,6 +17,13 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
-/*div.field_with_errors input[type="text"]{
+
+div.field_with_errors input[type="text"] {
   border: 1px solid red;
-}*/
+  font-weight: 700;
+  }
+
+  div.field_with_errors textarea {
+  border: 1px solid red;
+  font-weight: 700;
+  }
