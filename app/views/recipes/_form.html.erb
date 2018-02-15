@@ -1,17 +1,17 @@
 <%= form_for([@user, @recipe]) do |f| %>
   <%= f.hidden_field :user_id %>
   <div>
-    <%= f.label :title%>
-    <%= f.text_field :title%>
+    <%= f.label "Title"%>
+    <%= f.text_field :title, :placeholder => @recipe.errors.full_messages_for(:title).first || "Enter a new item..."%>
   </div>
   <div>
     <%= f.label "Approximate Cook Time (min)"%>
     <%= f.number_field :time %>
   </div>
-  <%= f.label :description %>
-  <%= f.text_area :description, cols: 40, rows: 6 %><br><br>
-  <%= f.label :directions %>
-  <%= f.text_area :directions, cols: 40, rows: 6 %><br><br>
+  <%= f.label "Description" %>
+  <%= f.text_area :description, cols: 40, rows: 6, :placeholder => @recipe.errors.full_messages_for(:description).first || "Enter description..." %><br><br>
+  <%= f.label "Directions" %>
+  <%= f.text_area :directions, cols: 40, rows: 6, :placeholder =>@recipe.errors.full_messages_for(:directions).first || "Enter directions..." %><br><br>
   <%= f.label :ingredients %><br><br>
 
   <%= render :partial => "ingredients/ingredient", :locals => {:recipe => @recipe, :f => f} %>
