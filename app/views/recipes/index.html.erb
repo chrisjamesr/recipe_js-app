@@ -1,7 +1,8 @@
 <%=display_user_name %>
-<%=form_tag "/recipes", :method=> "get" do %>
-  <%= select_tag :ingredient_id, options_from_collection_for_select(@ingredients, :id, :name), :prompt => "Ingredient" %>
-  <%= select_tag :category_id, options_from_collection_for_select(@categories, :id, :name), :prompt => "Category" %>
-  <%= submit_tag "Filter" %>
-<% end %>
+
+<%#=form_tag "/recipes", :method=> "get" do %>
+  <%#= select_tag :ingredient_id, options_from_collection_for_select(@ingredients, :id, :name), :prompt => "Ingredient" %>
+  <%#= select_tag :category_id, options_from_collection_for_select(@categories, :id, :name), :prompt => "Category" %>
+  <%#= submit_tag "Filter" %>
+<%# end %>
 <%= render :partial => "recipe", :collection => @recipes, :as => :recipe %>
