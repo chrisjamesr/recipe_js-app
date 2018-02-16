@@ -1,4 +1,4 @@
-<%= form_for([@user, @recipe]) do |f| %>
+<%= form_for([@user, @recipe], :html => {:class => "form-group"}) do |f| %>
   <%= f.hidden_field :user_id %>
   <div>
     <%= f.label "Title"%>
@@ -8,19 +8,32 @@
     <%= f.label "Approximate Cook Time (min)"%>
     <%= f.number_field :time %>
   </div>
-  <%= f.label "Description" %>
-  <%= f.text_area :description, cols: 40, rows: 6, :placeholder => @recipe.errors.full_messages_for(:description).first || "Enter description..." %><br><br>
-  <%= f.label "Directions" %>
-  <%= f.text_area :directions, cols: 40, rows: 6, :placeholder =>@recipe.errors.full_messages_for(:directions).first || "Enter directions..." %><br><br>
-  <%= f.label :ingredients %><br><br>
-
-  <%= render :partial => "ingredients/ingredient", :locals => {:recipe => @recipe, :f => f} %>
-
+  <div>
+    <%= f.label "Description" %>
+    <%= f.text_area :description, cols: 40, rows: 3, :placeholder => @recipe.errors.full_messages_for(:description).first || "Enter description..." %>
+  </div>
   <br><br>
+  <div>
+    <%= f.label "Directions" %>
+    <%= f.text_area :directions, cols: 40, rows: 3, :placeholder =>@recipe.errors.full_messages_for(:directions).first || "Enter directions..." %>
+  </div>
+  <br><br>
+  <div>
   <%= f.label :categories %><br>
-  <%= f.collection_check_boxes(:category_ids, Category.all, :id, :name) %><br>
+  <%= f.collection_check_boxes(:category_ids, Category.all, :id, :name, :class => "form-check form-check-inline") do |b|%>
+    <%= b.label(class: "form-check-label") { b.check_box(class: "form-check-input") +"  #{b.text}   " } %>
+  <% end %>
+</div>
+  <br>
   <%= f.fields_for :categories, @recipe.categories.build do |categories_fields| %>
-    <%= categories_fields.text_field :name, placeholder: "New Category" %><br />
+  <br>
+    <%= categories_fields.label :category, "New Category:  " %>
+    <%= categories_fields.text_field :name, placeholder: "Category Name"   %><br />
   <% end %><br><br>
+
+  <%= f.label :ingredients %>
+  <%= render :partial => "ingredients/ingredient", :locals => {:recipe => @recipe, :f => f} %>
+  <br>
+  
   <%= f.submit %>
 <% end %> 
