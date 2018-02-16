@@ -10,11 +10,14 @@ class UsersController < ApplicationController
       set_session
       redirect_to user_path(@user), :notice => "Welcome #{@user.name.capitalize}" 
     else      
-      flash[:alert] = @user.errors.full_messages
       render :new
     end
   end
 
+  def index
+    
+  end
+  
   def show
     @recipes = @user.recipes
   end
