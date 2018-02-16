@@ -18,12 +18,17 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-div.field_with_errors input[type="text"] {
+div.field_with_errors {
+  display: inline;
+  
+  input[type="text"] {
   border: 1px solid red;
-  font-weight: 700;
+  display: inline;
   }
 
-  div.field_with_errors textarea {
+  textarea {
   border: 1px solid red;
   font-weight: 700;
+
   }
+}
