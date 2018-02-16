@@ -26,7 +26,6 @@ class RecipesController < ApplicationController
     end
 
   end
-
   
   def index   
     if params[:user_id]
@@ -35,17 +34,14 @@ class RecipesController < ApplicationController
       @recipes = Recipe.filter_options(params)    
     end
   end
-
   
   def show
     
   end
 
-
   def edit
 
   end
-
 
   def update
     @recipe = Recipe.find(params[:id])
