@@ -1,7 +1,13 @@
+
 <h1>Sign In!</h1>
 
-<%= form_for :user, :url => login_path, :html => {:class => "form-group"} do |f| %>
-  <%= f.text_field :name, :placeholder => if_flash(:name) || "Enter Your Name" %>
-  <%= f.text_field :password, :placeholder => if_flash(:password) || "Enter Your Password" %>
-  <%= f.submit "Log In" %>
+<%= form_for :user, :url => login_path, :method => "post", :html => {:class => "form-group"} do |f| %>
+  <div class="form-group">
+    <%= f.text_field :name, :placeholder => (if_flash(:name) || "Enter Your Name"), :size => 30 %>
+  </div>
+  <div class="form-group">
+     <%= f.text_field :password, :placeholder => (if_flash(:password) || "Enter Your Password"), :size => 30 %>
+  </div>
+  <%= f.submit "Sign In" %>
+  
 <% end %>
