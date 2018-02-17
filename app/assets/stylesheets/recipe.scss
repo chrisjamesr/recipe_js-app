@@ -1,3 +1,20 @@
 // Place all the styles related to the Recipe controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#recipe_cards {
+  display: flex;
+  flex-flow: row wrap;
+  align-content: flex-start;
+  flex: none;
+  justify-content: space-between;
+  align-content: space-around;
+}
+
+.card {
+  border:  .5px solid rgb(45, 45, 45);
+  padding: 10px;
+  width: 18em;
+  margin: 1em;
+
+}
