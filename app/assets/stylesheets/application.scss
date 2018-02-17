@@ -17,6 +17,7 @@
 
 $enable-flex: true;
 @import "bootstrap";
+@import "nav";
 @import "recipe";
 
 body {
@@ -36,3 +37,4 @@ div.field_with_errors {
 
   }
 }
+
