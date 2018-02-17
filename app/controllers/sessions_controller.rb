@@ -37,8 +37,8 @@ class SessionsController < ApplicationController
   end
 
   def set_errors(params)
-    flash.now[:alert] = {:name => "User Not Found"} if User.find_by(:name => params[:user][:name]).nil?
     flash.now[:alert] = {:name => "Name Required"} if params[:user][:name].nil?
+    flash.now[:alert] = {:name => "User Not Found"} if User.find_by(:name => params[:user][:name]).nil?
     flash.now[:alert] = {:password => "Password Required"} if params[:user][:password].nil?
     flash.now[:alert] = {:password => "Password incorrect"} if @user && !@user.authenticate(params[:user][:password])
 
