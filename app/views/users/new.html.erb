@@ -1,7 +1,7 @@
 <h1>Sign Up!</h1>
 
 <%= form_for @user, :html => {:class => "form-group"} do |f| %>
-  <%= f.text_field :name ,:value => @user.errors.full_messages_for(:name).first, :placeholder => "Enter Your Name" %>
-  <%= f.text_field :password, :value => @user.errors.full_messages_for(:password).first, :placeholder => "Enter Your Password" %>
+  <%= f.text_field :name ,:value => (@user.errors.full_messages_for(:name).first || @user.name), :html =>{:class => "field_with_errors" },  :placeholder => "Enter Your Name" %>
+  <%= f.text_field :password, :value => @user.errors.full_messages_for(:password).first, :html => {:class => "field_with_errors"}, :placeholder => "Enter Your Password" %>
   <%= f.submit "Create Your Account" %>
 <% end %>

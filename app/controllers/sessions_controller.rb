@@ -5,7 +5,6 @@ class SessionsController < ApplicationController
   end
 
   def create
-    # raise params.inspect
     if auth.present?
       @user = User.login_from_omniauth(auth)
       set_session
@@ -19,6 +18,9 @@ class SessionsController < ApplicationController
         set_errors(params)
         render :new
       end
+    else
+      set_errors(params)
+      render :new
     end
   end
 
@@ -34,6 +36,7 @@ class SessionsController < ApplicationController
   end
 
   def set_errors(params)
+
     flash.now[:alert] = {:name => "Name Required"} if params[:user][:name].nil?
     flash.now[:alert] = {:name => "User Not Found"} if User.find_by(:name => params[:user][:name]).nil?
     flash.now[:alert] = {:password => "Password Required"} if params[:user][:password].nil?
