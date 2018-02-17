@@ -6,7 +6,11 @@ class SessionsController < ApplicationController
 
   def create
     # raise params.inspect
-    if params[:user][:name].present? && params[:user][:password].present? 
+    if auth.present?
+      @user = User.login_from_omniauth(auth)
+      set_session
+      redirect_to @user, :notice => "Welcome #{@user.name.capitalize}"
+    elsif params[:user][:name].present? && params[:user][:password].present? 
       @user = User.find_by(:name => params[:user][:name])
       if @user && @user.authenticate(params[:user][:password])
         set_session
@@ -15,13 +19,6 @@ class SessionsController < ApplicationController
         set_errors(params)
         render :new
       end
-    elsif auth.present?
-      @user = User.login_from_omniauth(auth)
-      set_session
-      redirect_to @user, :notice => "Welcome #{@user.name.capitalize}"
-    else
-      set_errors(params)
-      render :new
     end
   end
 
