@@ -1,21 +1,18 @@
 <%= tag.nav :class => "navbar navbar-default" do %>
-  <%=tag.div :class =>"container" do %>
-    <%= tag.div :class =>"navbar-header" do %>
-      <% if current_user %>
+  <%= tag.div :class =>"navbar-header" do %>
+    <% if current_user %>
 
-        <%= content_tag(:span, current_user.name, :class => "navbar-brand") %>  
-        <%= link_to "Add A Recipe", new_user_recipe_path(current_user), :class => "navbar-brand" %>     
-        <%= link_to "My Recipes", user_recipes_path(current_user), :class => "navbar-brand" %>   
-        <%= link_to "All Recipes", recipes_path, :class => "navbar-brand" %>
-        <%= link_to "Logout", logout_path, :method => 'delete', :class => "navbar-brand" %>
+      <%= content_tag(:span, current_user.name, :class => "navbar-brand") %>  
+      <%= link_to "Add A Recipe", new_user_recipe_path(current_user), :class => "navbar-brand" %>     
+      <%= link_to "My Recipes", user_recipes_path(current_user), :class => "navbar-brand" %>   
+      <%= link_to "All Recipes", recipes_path, :class => "navbar-brand" %>
+      <%= link_to "Logout", logout_path, :method => 'delete', :class => "navbar-brand" %>
 
-      <% else %>
+    <% else %>
 
-        <%= link_to "Sign Up", new_user_path, :class => "navbar-brand" %>
-        <%= link_to "Sign In", login_path, :class => "navbar-brand" %>
-        <%= link_to "Login via Facebook", '/auth/facebook', :class => "navbar-brand" %>
-
-      <% end %>
+      <%= link_to "Sign Up", new_user_path, :class => "navbar-brand" %>
+      <%= link_to "Sign In", login_path, :class => "navbar-brand" %>
+      <%= link_to "Login via Facebook", '/auth/facebook', :class => "navbar-brand" %>
 
     <% end %>
   <% end %>
