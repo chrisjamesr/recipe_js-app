@@ -10,14 +10,18 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
- *= require_self
+
  
  */
 
-@import "bootstrap-sprockets";
-@import "bootstrap";
 
+$enable-flex: true;
+@import "bootstrap";
+@import "recipe";
+
+body {
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+}
 div.field_with_errors {
   display: inline;
   
