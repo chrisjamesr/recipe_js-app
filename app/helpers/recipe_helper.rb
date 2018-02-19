@@ -16,4 +16,13 @@ module RecipeHelper
       # button_to "Delete", user_recipe_path(current_user, Recipe.find(params[:id])), :method => "delete"
     end
   end
+
+  def filter_options
+    {
+      "Longest" => :longest,
+      "Shortest" => :shortest, 
+      "Newest" => :newest,
+      "Oldest" => :oldest
+    }
+  end
 end  # End of

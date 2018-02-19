@@ -1,6 +1,6 @@
 class RecipesController < ApplicationController
   before_action :set_recipe!, :only => [:show, :edit]
-  before_action :set_categories_ingredients, :only => [:index, :newest, :oldest] 
+  before_action :set_categories_ingredients, :only => [:index, :newest, :oldest, :shortest, :longest] 
   before_action :current_user, :only => [:show, :edit]
   before_action :has_permission?, :only =>[:edit, :update, :destroy]
 
@@ -27,11 +27,14 @@ class RecipesController < ApplicationController
 
   end
   
-  def index   
+  def index
+    # raise params.inspect
     if params[:user_id]
       @recipes = Recipe.where(:user_id => params[:user_id])
+    elsif params[:filter].present?
+      redirect_to "/recipes/#{params[:filter]}"
     else
-      @recipes = Recipe.filter_options(params)    
+      @recipes = Recipe.all
     end
   end
   
