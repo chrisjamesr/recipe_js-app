@@ -16,11 +16,23 @@ class Recipe < ApplicationRecord
     joins(:recipe_categories)
     .where("recipe_categories.category_id = ?", category_id)
   }
+  scope :by_user, ->(user_id){where(:user_id => user_id)}
   scope :newest, ->{order(:created_at => :desc)}
   scope :oldest, ->{order(:created_at => :asc)}
   scope :shortest, ->{order(:time => :asc)}
   scope :longest, ->{order(:time => :desc)}
   
+  # scope :filter_options, ->(filter_params){
+  #   if filter_params[:ingredient_id].nil? && filter_params[:category_id].nil?
+  #     all
+  #   elsif filter_params[:ingredient_id].present? && filter_params[:category_id].present?
+  #     by_ingredient(filter_params[:ingredient_id]).by_category(filter_params[:category_id])
+  #   elsif filter_params[:category_id].present? && filter_params[:ingredient_id].empty?
+  #     by_category(filter_params[:category_id])
+  #   elsif filter_params[:ingredient_id].present? && filter_params[:category_id].empty?
+  #     by_ingredient(filter_params[:ingredient_id])
+  #   end
+  # }
 
   def ingredients_attributes=(ingredients_attributes)
     ingredients_attributes.each do |i, ingredient_attribute|
@@ -54,17 +66,17 @@ class Recipe < ApplicationRecord
     end
   end
 
-   def self.filter_options(params)
-    if params[:ingredient_id].nil? && params[:category_id].nil?
-      Recipe.all
-    elsif params[:ingredient_id].present? && params[:category_id].present?
-      Recipe.by_ingredient(params[:ingredient_id]).by_category(params[:category_id])
-    elsif params[:category_id].present? && params[:ingredient_id].empty?
-      Recipe.by_category(params[:category_id])
-    elsif params[:ingredient_id].present? && params[:category_id].empty?
-      Recipe.by_ingredient(params[:ingredient_id])
-    end
+  #  def self.filter_options(params)
+  #   if params[:ingredient_id].nil? && params[:category_id].nil?
+  #     all
+  #   elsif params[:ingredient_id].present? && params[:category_id].present?
+  #     by_ingredient(params[:ingredient_id]).by_category(params[:category_id])
+  #   elsif params[:category_id].present? && params[:ingredient_id].empty?
+  #     by_category(params[:category_id])
+  #   elsif params[:ingredient_id].present? && params[:category_id].empty?
+  #     by_ingredient(params[:ingredient_id])
+  #   end
   
-  end
+  # end
 
 end
