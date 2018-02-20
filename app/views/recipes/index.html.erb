@@ -1,5 +1,5 @@
 <%=display_user_name %>
 <%= render "/layouts/filter"%>
 <div id="recipe_cards">
-  <%= render :partial => "recipe", :collection => @recipes || "no recipes", :as => :recipe  %>
+  <%= render(@recipes)%>
 </div>  
