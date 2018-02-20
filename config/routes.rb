@@ -12,12 +12,15 @@ Rails.application.routes.draw do
   resources :users do
     resources :recipes 
   end
-  resources :ingredients, :categories, :recipes, :only => [:index]
+  resources :ingredients, :categories, :recipes, :only => [:index] 
+
 
   delete '/recipes/:id/recipe_ingredients/:id', :to => 'recipe_ingredients#destroy', :as => :remove_ingredient
+
   get '/recipes/newest' => 'recipes#newest'
   get '/recipes/oldest' => 'recipes#oldest'
   get '/recipes/longest' => 'recipes#longest'
-  get '/recipes/shortest' => 'recipes#shortest'
+  get '/recipes/shortest' => 'recipes#shortest'  
+
   # root
 end
