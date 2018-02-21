@@ -21,18 +21,6 @@ class Recipe < ApplicationRecord
   scope :oldest, ->{order(:created_at => :asc)}
   scope :shortest, ->{order(:time => :asc)}
   scope :longest, ->{order(:time => :desc)}
-  
-  # scope :filter_options, ->(filter_params){
-  #   if filter_params[:ingredient_id].nil? && filter_params[:category_id].nil?
-  #     all
-  #   elsif filter_params[:ingredient_id].present? && filter_params[:category_id].present?
-  #     by_ingredient(filter_params[:ingredient_id]).by_category(filter_params[:category_id])
-  #   elsif filter_params[:category_id].present? && filter_params[:ingredient_id].empty?
-  #     by_category(filter_params[:category_id])
-  #   elsif filter_params[:ingredient_id].present? && filter_params[:category_id].empty?
-  #     by_ingredient(filter_params[:ingredient_id])
-  #   end
-  # }
 
   def ingredients_attributes=(ingredients_attributes)
     ingredients_attributes.each do |i, ingredient_attribute|
@@ -65,18 +53,36 @@ class Recipe < ApplicationRecord
       end
     end
   end
-
-  #  def self.filter_options(params)
-  #   if params[:ingredient_id].nil? && params[:category_id].nil?
-  #     all
-  #   elsif params[:ingredient_id].present? && params[:category_id].present?
-  #     by_ingredient(params[:ingredient_id]).by_category(params[:category_id])
-  #   elsif params[:category_id].present? && params[:ingredient_id].empty?
-  #     by_category(params[:category_id])
-  #   elsif params[:ingredient_id].present? && params[:category_id].empty?
-  #     by_ingredient(params[:ingredient_id])
-  #   end
-  
-  # end
+ 
+  def self.filter_options(filter_params)
+    filter_keys = filter_params.select{ |k, v| v.present?}   
+    if filter_keys.present?
+      filter_keys.inject(self){|k, v| k.send(*v)}
+    else
+      Recipe.all
+    end
+  end  
 
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
