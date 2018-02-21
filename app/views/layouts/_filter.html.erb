@@ -2,12 +2,10 @@
   <%=form_tag recipes_path, :method=> "get", :class =>"filter-menu" do %>
     <%= select_tag :ingredient_id, options_from_collection_for_select(@ingredients, :id, :name), :prompt => "Ingredient" %>
     <%= select_tag :category_id, options_from_collection_for_select(@categories, :id, :name), :prompt => "Category" %>
-    <%= select_tag "order", options_for_select(filter_options), :prompt => "Reorder" %>
+    <%= select_tag "order", options_for_select(order_options), :prompt => "Reorder" %>
+    <%= if_user_path %>
     <%= submit_tag "Filter" %>
   <% end %>
 <% end %>
-
-
-
 
 
