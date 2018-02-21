@@ -2,8 +2,8 @@ class RecipesController < ApplicationController
   before_action :set_recipe!, :only => [:show, :edit]
   before_action :set_categories_ingredients, :only => [:index, :newest, :oldest, :shortest, :longest] 
   before_action :current_user, :only => [:show, :edit]
-  before_action :has_permission?, :only =>[:edit, :update, :destroy]
-
+  before_action :has_permission?, :only => [:edit, :update, :destroy]
+  before_action :set_filter_params, :only => [:index]
 
   def new
     if !logged_in?  
@@ -28,22 +28,19 @@ class RecipesController < ApplicationController
   end
   
   def index
-    # raise params.inspect
     if params[:user_id]
-      @recipes = Recipe.where(:user_id => params[:user_id])
-    elsif params[:filter].present?
-      redirect_to "/recipes/#{params[:filter]}"
+      @recipes = Recipe.by_user(params[:user_id])
+    elsif params[:order].present?      
+      redirect_to "/recipes/#{params[:order]}"
     else
-      @recipes = Recipe.all
+      @recipes = Recipe.all & Recipe.filter_options(session[:filter_params])
     end
   end
   
-  def show
-    
+  def show    
   end
 
   def edit
-
   end
 
   def update
@@ -53,26 +50,25 @@ class RecipesController < ApplicationController
   end
 
   def destroy
-
   end
     
   def newest
-    @recipes = Recipe.newest
+    @recipes = Recipe.newest & Recipe.filter_options(session[:filter_params])
     render :index
   end
 
   def oldest
-    @recipes = Recipe.oldest
+    @recipes = Recipe.oldest & Recipe.filter_options(session[:filter_params])
     render :index
   end
 
   def shortest
-    @recipes = Recipe.shortest
+    @recipes = Recipe.shortest & Recipe.filter_options(session[:filter_params])
     render :index
   end
 
   def longest
-    @recipes = Recipe.longest
+    @recipes = Recipe.longest & Recipe.filter_options(session[:filter_params])
     render :index
   end
   
@@ -100,4 +96,19 @@ class RecipesController < ApplicationController
       @categories = Category.all.order(:name)
     end
 
-end
+    def set_filter_params
+      session[:filter_params] = {
+        :by_ingredient => params[:ingredient_id],
+        :by_category => params[:category_id],
+        :by_user => params[:user_id]
+      }      
+      # raise session[:filter_params].inspect
+    end
+  
+    def clear_session_filter_params
+      session[:filter_params].clear
+    end
+    
+
+
+end  # End of Class
