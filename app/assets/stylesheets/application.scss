@@ -37,12 +37,17 @@ div.field_with_errors {
 
   }
 }
+// #filter {
+//   width: 70%;
+//   margin: 0 auto 0 auto;
+// } 
 .filter-menu {
   display:flex;
   flex-flow: row wrap;
   align-content: flex-start;
   flex: none;
-  justify-content: space-aroundx;
+  justify-content: space-around;
   align-content: space-around;
 }
 
+ 
