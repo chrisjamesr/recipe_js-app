@@ -20,8 +20,8 @@
   <br><br>
   <div>
   <%= f.label :categories %><br>
-  <%= f.collection_check_boxes(:category_ids, Category.all, :id, :name, :class => "form-check form-check-inline") do |b|%>
-    <%= b.label(class: "form-check-label") { b.check_box(class: "form-check-input") +"  #{b.text}   " } %>
+  <%= f.collection_check_boxes(:category_ids, Category.all, :id, :name) do |b|%>
+    <%= b.label { b.check_box + b.text} %>
   <% end %>
 </div>
   <br>
