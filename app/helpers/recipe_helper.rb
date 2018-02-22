@@ -17,7 +17,7 @@ module RecipeHelper
     end
   end
 
-  def filter_options
+  def order_options
     {
       "Longest" => :longest,
       "Shortest" => :shortest, 
