@@ -24,9 +24,10 @@
 
 h5 {
   margin-bottom: 0;
-  .card_title {
+}
+
+.card-title {
    margin-bottom: 0;
- }
 }
 
 // .card-title{
@@ -34,10 +35,21 @@ h5 {
 // }
 
 span.category-tag {
-  font-size: .6em;
+  font-size: .75em;
+}
+div.category-tag{
+  margin-bottom: .75rem
 }
 
 div.category-checkbox{
   display:inline-block;
   // align-content: flex-start;
+}
+
+div.edit-form-section{
+  margin-bottom: .75rem;
+  
+  label{
+      margin-bottom:0;
+  }
 }
