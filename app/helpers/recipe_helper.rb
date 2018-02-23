@@ -25,4 +25,8 @@ module RecipeHelper
       "Oldest" => :oldest
     }
   end
+
+  def no_recipes 
+    content_tag(:div, "No Recipes", :class => "no-recipes")
+  end
 end  # End of
