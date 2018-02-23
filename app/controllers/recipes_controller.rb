@@ -28,8 +28,10 @@ class RecipesController < ApplicationController
   end
   
   def index
-    if params[:user_id]
-      @recipes = Recipe.by_user(params[:user_id])
+    if params[:user_id] && params[:order].present?      
+      redirect_to "/recipes/#{params[:order]}"
+    elsif params[:user_id]
+      @recipes = Recipe.by_user(params[:user_id]).filter_options(session[:filter_params]) 
     elsif params[:order].present?      
       redirect_to "/recipes/#{params[:order]}"
     else
