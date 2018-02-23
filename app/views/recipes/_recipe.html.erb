@@ -1,12 +1,13 @@
 <div class="card">
   <div class="card-body">
     <h5 class="card-title"><%= link_to recipe.title, user_recipe_path(recipe.user, recipe) %></h5>
+     <div class="category-tag">
+      <%= render :partial => "categories/categories", :collection => recipe.categories, :as => :category %>
+    </div>
     <h6 class="card-subtitle mb-2 text-muted">Submitted by <%= link_to recipe.user.name, user_recipes_path(recipe.user) %></h6>
     <em>Approximate Cook Time: <%= recipe.time %> Min</em><br>
     <%= recipe.description %>
-    <div class="category-tag">
-      <%= render :partial => "categories/categories", :collection => recipe.categories, :as => :category %>
-    </div>
+   
   </div>
 </div>  
   <br>
