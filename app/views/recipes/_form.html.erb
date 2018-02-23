@@ -1,39 +1,38 @@
-<%= form_for([@user, @recipe], :html => {:class => "form-group"}) do |f| %>
-  <%= f.hidden_field :user_id %>
-  <div>
-    <%= f.label "Title"%>
-    <%= f.text_field :title, :placeholder => @recipe.errors.full_messages_for(:title).first || "Enter a new item..."%>
-  </div>
-  <div>
-    <%= f.label "Approximate Cook Time (min)"%>
-    <%= f.number_field :time %>
-  </div>
-  <div>
-    <%= f.label "Description" %>
-    <%= f.text_area :description, cols: 40, rows: 3, :placeholder => @recipe.errors.full_messages_for(:description).first || "Enter description..." %>
-  </div>
-  <br><br>
-  <div>
-    <%= f.label "Directions" %>
-    <%= f.text_area :directions, cols: 40, rows: 3, :placeholder =>@recipe.errors.full_messages_for(:directions).first || "Enter directions..." %>
-  </div>
-  <br><br>
-  <div>
-  <%= f.label :categories %><br>
-  <%= f.collection_check_boxes(:category_ids, Category.all, :id, :name) do |b|%>
-    <%= b.label { b.check_box + b.text} %>
-  <% end %>
+<div class ="form-group">
+  <%= form_for([@user, @recipe]) do |f| %>
+    <%= f.hidden_field :user_id %>
+    <div class="edit-form-section">
+      <%= f.label "Title"%>
+      <%= f.text_field :title, :placeholder => @recipe.errors.full_messages_for(:title).first || "Enter a new item...", :class=> "form-control"%>
+    </div>
+    <div class="edit-form-section">
+      <%= f.label "Approximate Cook Time (min)"%>
+      <%= f.number_field :time, :class=> "form-control" %>
+    </div>
+    <div class="edit-form-section">
+      <%= f.label "Description" %>
+      <%= f.text_area :description, cols: 40, rows: 3, :placeholder => @recipe.errors.full_messages_for(:description).first || "Enter description...", :class=> "form-control"  %>
+    </div>    
+    <div class="edit-form-section">
+      <%= f.label "Directions" %>
+      <%= f.text_area :directions, cols: 40, rows: 3, :placeholder =>@recipe.errors.full_messages_for(:directions).first || "Enter directions...", :class=> "form-control"  %>
+    </div>    
+    <div class="edit-form-section">
+      <%= f.label :categories %><br>
+      <%= f.collection_check_boxes(:category_ids, Category.all, :id, :name) do |b|%>
+        <%= b.label { b.check_box + b.text} %>
+      <% end %>
+    </div>
+    <div class="edit-form-section">
+      <%= f.fields_for :categories, @recipe.categories.build do |categories_fields| %>
+        <%= categories_fields.label :category, "New Category:  " %>
+        <%= categories_fields.text_field :name, placeholder: "Category Name", :class=> "form-control"    %>
+      <% end %>
+    </div>
+    <div class="edit-form-section">
+      <%= f.label :ingredients %>
+      <%= render :partial => "ingredients/ingredient", :locals => {:recipe => @recipe, :f => f} %>
+    </div>    
+    <%= f.submit %>
+  <% end %> 
 </div>
-  <br>
-  <%= f.fields_for :categories, @recipe.categories.build do |categories_fields| %>
-  <br>
-    <%= categories_fields.label :category, "New Category:  " %>
-    <%= categories_fields.text_field :name, placeholder: "Category Name"   %><br />
-  <% end %><br><br>
-
-  <%= f.label :ingredients %>
-  <%= render :partial => "ingredients/ingredient", :locals => {:recipe => @recipe, :f => f} %>
-  <br>
-  
-  <%= f.submit %>
-<% end %> 
