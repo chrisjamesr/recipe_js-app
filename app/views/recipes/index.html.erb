@@ -1,5 +1,9 @@
-<%=display_user_name %>
+
 <%= render "/layouts/filter"%>
+<br>
+<div>
+  <h1><%=display_user_name %></h1>
+</div>
 <div id="recipe_cards">
-  <%= render(@recipes)%>
+  <%= render(@recipes) || no_recipes %>
 </div>  
