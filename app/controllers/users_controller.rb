@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save 
       set_session
-      redirect_to user_path(@user), :notice => "Welcome #{@user.name.capitalize}" 
+      redirect_to recipes_path, :notice => "Welcome #{@user.name.capitalize}" 
     else      
       render :new
     end
@@ -26,8 +26,5 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :password)
-  end
-
-
-  
+  end  
 end
