@@ -1,13 +1,15 @@
 <div class ="form-group">
   <%= form_for([@user, @recipe]) do |f| %>
     <%= f.hidden_field :user_id %>
-    <div class="edit-form-section">
-      <%= f.label "Title"%>
-      <%= f.text_field :title, :placeholder => @recipe.errors.full_messages_for(:title).first || "Enter a new item...", :class=> "form-control"%>
-    </div>
-    <div class="edit-form-section">
-      <%= f.label "Approximate Cook Time (min)"%>
-      <%= f.number_field :time, :class=> "form-control" %>
+    <div class="first-row">
+      <div class="edit-form-section">
+        <%= f.label "Title"%>
+        <%= f.text_field :title, :placeholder => @recipe.errors.full_messages_for(:title).first || "Enter a new item...", :class=> "form-control"%>
+      </div>
+      <div class="edit-form-section">
+        <%= f.label "Approximate Cook Time (min)"%>
+        <%= f.number_field :time, :class=> "form-control" %>
+      </div>
     </div>
     <div class="edit-form-section">
       <%= f.label "Description" %>
