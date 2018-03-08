@@ -1,5 +1,5 @@
 class RecipeIngredientsController < ApplicationController
-  before_action :current_user
+  before_action :current_user, :has_permission?
   
   def create
 
