@@ -59,3 +59,16 @@ div h1{
 div.no-recipes{
   margin: 20px auto;
 }
+
+div.first-row{
+  display: flex;
+  justify-content: space-between; 
+  div{
+    width: 48%;
+  }
+}
+
+div#filter {
+  margin: 21px 0 8px 0;
+}
+
