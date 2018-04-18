@@ -1,8 +1,12 @@
-$(function(e){
-  AddEventListeners()
+$(function(){
+  addEventListeners()
 })
 
-function addEventListeners()){
-  $('a#next-recipe').on('click', () => loadNext()
+function addEventListeners(){
+  $('a#js-next').on('click', () => loadNext())
 }
 
+function loadNext(){
+  event.preventDefault()
+  alert("its working");
+}
