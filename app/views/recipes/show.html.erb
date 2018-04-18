@@ -1,13 +1,14 @@
-<h1><%= @recipe.title %></h1> 
-<p> Approximate Cook Time:  <%= @recipe.time %> Min </p>
-<p><em> <%= @recipe.description %></em></p>
+<h1 id="js-recipe-title"><%= @recipe.title %></h1> 
+<p id="js-cook-time"> Approximate Cook Time:  <%= @recipe.time %> Min </p>
+<p id="js-description"><em> <%= @recipe.description %></em></p>
 <ul>
   <% @recipe.recipe_ingredients.each do |recipe_ingredient| %>
     <li> <%= recipe_ingredient.ingredient.name %> - <%=recipe_ingredient.quantity %>  <%= recipe_ingredient.preparation %></li>
     
   <% end %>
 </ul>
-<p> <%= @recipe.directions %></p>
+<p id="js-directions"> <%= @recipe.directions %></p>
 <p>
   <%= show_edit_link %>
+  <a href="#" id="js-next">Next Recipe</a>
 </p>
