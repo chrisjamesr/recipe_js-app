@@ -1,5 +1,5 @@
 <h1 id="js-recipe-title"><%= @recipe.title %></h1> 
-<p id="js-cook-time"> Approximate Cook Time:  <%= @recipe.time %> Min </p>
+<p> Approximate Cook Time:  <span id="js-cook-time"><%= @recipe.time %></span>  Min </p>
 <p id="js-description"><em> <%= @recipe.description %></em></p>
 <ul>
   <% @recipe.recipe_ingredients.each do |recipe_ingredient| %>
@@ -9,6 +9,6 @@
 </ul>
 <p id="js-directions"> <%= @recipe.directions %></p>
 <p>
-  <%= show_edit_link %>
-  <a href="#" id="js-next">Next Recipe</a>
+  <%= show_edit_link %> <br>
+  <a href="#" id="js-next" data-id="<%=@recipe.id%>">Next Recipe</a>
 </p>
