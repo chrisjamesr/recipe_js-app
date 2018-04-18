@@ -25,6 +25,6 @@ Rails.application.routes.draw do
   get '/recipes/oldest' => 'recipes#oldest'
   get '/recipes/longest' => 'recipes#longest'
   get '/recipes/shortest' => 'recipes#shortest'  
-
+  get '/users/:id/recipes/:id/recipe_data', to: 'recipes#recipe_data'
   # root
 end
