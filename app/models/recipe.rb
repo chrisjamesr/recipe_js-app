@@ -21,6 +21,8 @@ class Recipe < ApplicationRecord
   scope :oldest, ->{order(:created_at => :asc)}
   scope :shortest, ->{order(:time => :asc)}
   scope :longest, ->{order(:time => :desc)}
+  # scope :next, ->(user_id, current_id){where("user_id = ?",user_id).where("id > ?",current_id).first}
+  # scope :previous, ->(user_id, current_id){where("user_id = ?",user_id).where("id < ?",current_id).first}
 
   def ingredients_attributes=(ingredients_attributes)
     ingredients_attributes.each do |i, ingredient_attribute|
@@ -63,26 +65,28 @@ class Recipe < ApplicationRecord
     end
   end  
 
-end
+  def self.find_recipe(user_id, new_recipe_id, current_recipe_id)
+    if !!new_recipe_id
+      if new_recipe_id.to_i > current_recipe_id.to_i
+        # next
+        if recipe = Recipe.where("user_id = ?",user_id).where("id > ?",current_recipe_id).first
+          recipe
+        else 
+          recipe = Recipe.where("user_id = ?", user_id).first
+        end
+      elsif new_recipe_id.to_i < current_recipe_id.to_i
+        # previous
+        # binding.pry
+        if recipe = Recipe.where("user_id = ?",user_id).where("id < ?",current_id).first
+          recipe
+        else
+          recipe = Recipe.where("user_id = ?", user_id).last
+        end
+      end
+    else
+      Recipe.find(current_recipe_id)
+    end
+  end
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  
+end #end of Class
