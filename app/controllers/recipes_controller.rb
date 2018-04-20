@@ -1,5 +1,5 @@
 class RecipesController < ApplicationController
-  before_action :set_recipe!, :only => [:show, :edit]
+  before_action :set_recipe!, :only => [:edit]
   before_action :set_categories_ingredients, :only => [:index, :newest, :oldest, :shortest, :longest] 
   before_action :current_user, :only => [:show, :edit]
   before_action :has_permission?, :only => [:edit, :update, :destroy]
@@ -28,6 +28,7 @@ class RecipesController < ApplicationController
   end
   
   def index
+    # binding.pry
     if params[:user_id] && params[:order].present?      
       redirect_to "/recipes/#{params[:order]}"
     elsif params[:user_id]
@@ -37,9 +38,14 @@ class RecipesController < ApplicationController
     else
       @recipes = Recipe.all & Recipe.filter_options(session[:filter_params])
     end
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: @recipes, status: 200}
+    end
   end
   
   def show    
+    @recipe = Recipe.find_recipe(params[:user_id], params[:new_recipe_id], params[:id])
     respond_to do |format|
       format.html { render :show }
       format.json { render json: @recipe, status: 200}
@@ -120,6 +126,6 @@ class RecipesController < ApplicationController
       session[:filter_params].clear
     end
     
-
+  
 
 end  # End of Class
