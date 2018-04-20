@@ -1,4 +1,5 @@
-<h1 id="js-recipe-title"><%= @recipe.title %></h1> 
+<h1 id="js-recipe-title" data-recipe-id="<%= @recipe.id %>" ><%= @recipe.title %></h1> 
+<h6 class="mb-2 text-muted" id="js-user" data-user-id="<%=@recipe.user.id%>">Submitted by <%= link_to @recipe.user.name, user_recipes_path(@recipe.user), id: "js-user-link" %></h6>
 <p> Approximate Cook Time:  <span id="js-cook-time"><%= @recipe.time %></span>  Min </p>
 <p id="js-description"><em> <%= @recipe.description %></em></p>
 <ul>
@@ -10,5 +11,7 @@
 <p id="js-directions"> <%= @recipe.directions %></p>
 <p>
   <%= show_edit_link %> <br>
-  <a href="#" id="js-next" data-id="<%=@recipe.id%>">Next Recipe</a>
+  <button id="js-previous">Previous Recipe</button>  
+  <br>
+  <button id="js-next">Next Recipe</button>
 </p>
