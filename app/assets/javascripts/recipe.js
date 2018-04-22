@@ -6,16 +6,44 @@ $(document).on('turbolinks:load', function(){
 function addEventListeners(){
   $('#js-next').on('click', ()=>loadNext())
   $('#js-previous').on('click', ()=>loadPrevious())
-  console.log("listeners loaded")
+  $('.js-user-link').on('click', (tag)=>loadIndexedRecipes(tag))
 }
 
-function loadRecipes(){
-  const userId = $('js-recipe-title').data()["userId"]
-  let res = {}
-  $.get(`http://localhost:3000/users/${userId}/recipes/`,'',null,'json')
+function loadIndexedRecipes(tag){
+  event.preventDefault()
+  debugger
+  let userUrl = $(tag.target).attr('href')
+  let userId = userUrl.match(/\d+/)[0] 
+  // let res = {}
+  $.get(userUrl, {user_id: userId} , null,'json')
     .done(function(response){
       response.forEach(element=> new Recipe(element))
-    })  
+    }).done(
+    recipes=> console.log(recipes));
+    // displayIndexedRecipes(recipes)
+    
+}
+
+function displayIndexedRecipes(recipes){
+  $('#recipe-cards').empty();
+  debugger
+}
+
+function displayRecipe(recipe){
+  let recipeTemplateString = `<div class="card">
+  <div class="card-body">
+    <h5 class="card-title"><%= link_to recipe.title, user_recipe_path(recipe.user, recipe) %></h5>
+     <div class="category-tag">
+      <%= render :partial => "categories/categories", :collection => recipe.categories, :as => :category %>
+    </div>
+    <h6 class="card-subtitle mb-2 text-muted">Submitted by <%= link_to ${recipe}, user_recipes_path(recipe.user),class: "js-user-link" %></h6>
+    <em>Approximate Cook Time: ${recipe.time} Min</em><br>
+    <%= recipe.description %>
+   
+  </div>
+</div>  
+  <br>`
+
 }
 
 function loadNext(){
@@ -61,7 +89,7 @@ function createRecipe(){
       this.description = response.description
       this.time = response.time
       this.title = response.title
-      this.userId = response.user_id
+      this.user = response.user
       this.directions = response.directions
       recipes.push(this)
     }
@@ -70,5 +98,14 @@ function createRecipe(){
     }
   }
 }
-
 const Recipe = new createRecipe
+
+function createUser(){
+  let users = []
+  return class User{
+    constructor(responseUser){
+      this.id = responseUser.id
+      this.name = responseUser.name
+    }
+  }
+}
