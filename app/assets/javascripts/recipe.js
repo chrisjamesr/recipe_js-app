@@ -36,11 +36,9 @@ function displayIndexedRecipes(){
 }
 
 function displayRecipe(recipe){
-  debugger
   let recipeTemplate = $('#recipe-template').html()
   let recipeTemplateString = Handlebars.compile(recipeTemplate);
-
-  $('#recipe-cards').append(recipeTemplateString)
+  $('#recipe-body').html(recipeTemplateString(recipe))
 }
 
 function loadNext(){
@@ -69,6 +67,9 @@ function loadRecipeText(res){
   
 }
 
+function addRecipeIngredients(recipeIngredientsArray){
+  recipeIngredientsArray.forEach(item => new RecipeIngredient(item))
+}
 
 function createRecipe(){
   let recipes = []
