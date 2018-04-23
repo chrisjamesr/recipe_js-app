@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   end
 
   def index
-    
+    render json: User.all, response: 200
   end
   
   def show
