@@ -11,39 +11,47 @@ function addEventListeners(){
 
 function loadIndexedRecipes(tag){
   event.preventDefault()
-  debugger
   let userUrl = $(tag.target).attr('href')
   let userId = userUrl.match(/\d+/)[0] 
   // let res = {}
   $.get(userUrl, {user_id: userId} , null,'json')
     .done(function(response){
-      response.forEach(element=> new Recipe(element))
-    }).done(
-    recipes=> console.log(recipes));
-    // displayIndexedRecipes(recipes)
-    
+      response.forEach(function(element){
+       // new User.find(element.user)
+       new Recipe(element)
+        
+    })
+    displayIndexedRecipes()    
+  })
 }
 
-function displayIndexedRecipes(recipes){
+function getUserInfo(){
+  let userUrl = $(tag.target).attr('href')
+  let userId = userUrl.match(/\d+/)[0] 
+  return {url: userUrl, id: userId}
+}
+
+function displayIndexedRecipes(){
   $('#recipe-cards').empty();
-  debugger
+  Recipe.all().forEach(recipe=> displayRecipe(recipe))
 }
 
 function displayRecipe(recipe){
   let recipeTemplateString = `<div class="card">
   <div class="card-body">
-    <h5 class="card-title"><%= link_to recipe.title, user_recipe_path(recipe.user, recipe) %></h5>
+    <h5 class="card-title"><%= link_to ${recipe.title}, user_recipe_path(recipe.user, recipe) %></h5>
      <div class="category-tag">
       <%= render :partial => "categories/categories", :collection => recipe.categories, :as => :category %>
     </div>
-    <h6 class="card-subtitle mb-2 text-muted">Submitted by <%= link_to ${recipe}, user_recipes_path(recipe.user),class: "js-user-link" %></h6>
+    <h6 class="card-subtitle mb-2 text-muted">Submitted by <%= link_to ${recipe.user.name}, user_recipes_path(recipe.user),class: "js-user-link" %></h6>
     <em>Approximate Cook Time: ${recipe.time} Min</em><br>
     <%= recipe.description %>
    
   </div>
 </div>  
   <br>`
-
+  // debugger
+  $('#recipe-cards').append(recipeTemplateString)
 }
 
 function loadNext(){
@@ -89,9 +97,10 @@ function createRecipe(){
       this.description = response.description
       this.time = response.time
       this.title = response.title
-      this.user = response.user
+      this.user = User.findOrCreateUser(response.user)
       this.directions = response.directions
-      recipes.push(this)
+      recipes.push(this);
+      this.user.addRecipe(this);
     }
     static all(){
       return recipes;
@@ -106,6 +115,22 @@ function createUser(){
     constructor(responseUser){
       this.id = responseUser.id
       this.name = responseUser.name
+      this.recipes = []
+      users.push(this)
+    }
+    static recipes(){
+      return this.recipes
+    }
+    static all(){
+      return users
+    }
+    addRecipe(recipe){
+      this.recipes.push(recipe);
+    }
+    static findOrCreateUser(userObj){
+      return users.find(user=> user.id === userObj.id && user.name === userObj.name) || new User(userObj) 
     }
   }
 }
+
+const User = new createUser
