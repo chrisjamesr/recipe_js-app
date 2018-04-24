@@ -6,23 +6,16 @@
 </div>  
 
 <script type="text/x-handlebars-template" id="recipe-template">
-
- 
   {{#recipes}}
   <div class="card">
     <div class="card-body">       
       <h5 class="card-title">
-        <%#= link_to "{{title}}", user_recipe_path(recipe.user, recipe) %>
-        <a href="/users/{{user.id}}/recipes/{{id}}" class = "js-user-recipe-link">      {{title}}
-      </a>
+        <a href="/users/{{user.id}}/recipes/{{id}}" class = "js-user-recipe-link">{{title}}</a>
       </h5>
        <div class="category-tag">
-        <%#= render :partial => "categories/categories", :collection => recipe.categories, :as => :category %>
-        <!-- {{categories}} -->
        </div>
       <h6 class="card-subtitle mb-2 text-muted">Submitted by 
         <a href="/users/{{user.id}}/recipes/" class = "js-user-link">{{user.name}}</a> 
-        <%#= link_to "{{recipe.user.name}}", user_recipes_path(recipe.user),class: "js-user-link" %>
       </h6>
       <em>Approximate Cook Time: {{time}} Min</em><br>
       {{description}}
@@ -31,16 +24,3 @@
   <br> 
   {{/recipes}}
 </script>
-
-  <!-- <div>
-    {{#recipes}}
-    <ul>
-      <li>{{title}}</li>
-      <li>{{id}}</li>  
-      <li>{{user.name}}</li>
-      <li>{{time}}</li>
-      <li>{{description}}</li>
-    </ul>    
-    {{/recipes}} 
-  </div>
-<br> -->
