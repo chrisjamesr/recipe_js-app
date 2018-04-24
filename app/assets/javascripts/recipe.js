@@ -22,20 +22,24 @@ function loadIndexedRecipes(tag){
        // new User.find(element.user)
        new Recipe(element)        
     })
-    displayIndexedRecipes()    
+    displayIndexedRecipes(userId)    
   })
 }
 
     // Index Page Functions
-function displayIndexedRecipes(){
+function displayIndexedRecipes(userId){
   $('#recipe-cards').empty();
-  Recipe.all().forEach(recipe=> displayRecipe(recipe))
+  // Recipe.all().forEach(recipe=> displayRecipe(recipe))
+  let recipeTemplateString = $('#recipe-template').html()
+  let recipeTemplate = Handlebars.compile(recipeTemplateString);
+  let recipes = { recipes: Recipe.userRecipes(userId)}
+  $('#recipe-cards').html(recipeTemplate(recipes))
 }
 
-function displayRecipe(recipe){
-  // let recipeTemplate = $('#recipe-template').html()
-  // let recipeTemplateString = Handlebars.compile(recipeTemplate);
-  // $('#recipe-body').html(recipeTemplateString(recipe))
+function displayRecipe(recipes){
+  let recipeTemplate = $('#recipe-template').html()
+  let recipeTemplateString = Handlebars.compile(recipeTemplate);
+  $('#recipe-body').html(recipeTemplate(recipes))
 }
 
     // Show Page Functions
@@ -94,6 +98,11 @@ function createRecipe(){
     }
     static all(){
       return recipes;
+    }
+    static userRecipes(userId){
+      return Recipe.all().filter(function(recipe){
+        return recipe.user.id === parseInt(userId)
+      })
     }
     addRecipeIngredients(recipeIngredientsArray){
       recipeIngredientsArray.forEach(function(item){
