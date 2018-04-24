@@ -1,6 +1,5 @@
 $(document).on('turbolinks:load', function(){
   addEventListeners()
-  // loadRecipes()
 })
 
 function addEventListeners(){
@@ -19,14 +18,13 @@ function loadIndexedRecipes(tag){
   $.get(userUrl, {user_id: userId} , null,'json')
     .done(function(response){
       response.forEach(function(element){
-       // new User.find(element.user)
        return indexedRecipes.push(new Recipe(element))        
     })
     displayIndexedRecipes(indexedRecipes)    
   })
 }
 
-    // Index Page Functions
+      // Index Page Functions
 function displayIndexedRecipes(indexedRecipes){
   $('#recipe-cards').empty();
   // Recipe.all().forEach(recipe=> displayRecipe(recipe))
@@ -42,7 +40,7 @@ function displayRecipe(recipes){
   $('#recipe-body').html(recipeTemplate(recipes))
 }
 
-    // Show Page Functions
+      // Show Page Functions
 function loadNext(){
   event.preventDefault()
   let userUrl = $('#js-user-link').attr('href')
