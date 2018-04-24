@@ -15,24 +15,24 @@ function loadIndexedRecipes(tag){
   event.preventDefault()
   let userUrl = $(tag.target).attr('href')
   let userId = userUrl.match(/\d+/)[0] 
-  // let res = {}
+  let indexedRecipes = []
   $.get(userUrl, {user_id: userId} , null,'json')
     .done(function(response){
       response.forEach(function(element){
        // new User.find(element.user)
-       new Recipe(element)        
+       return indexedRecipes.push(new Recipe(element))        
     })
-    displayIndexedRecipes(userId)    
+    displayIndexedRecipes(indexedRecipes)    
   })
 }
 
     // Index Page Functions
-function displayIndexedRecipes(userId){
+function displayIndexedRecipes(indexedRecipes){
   $('#recipe-cards').empty();
   // Recipe.all().forEach(recipe=> displayRecipe(recipe))
   let recipeTemplateString = $('#recipe-template').html()
   let recipeTemplate = Handlebars.compile(recipeTemplateString);
-  let recipes = { recipes: Recipe.userRecipes(userId)}
+  let recipes = { recipes: indexedRecipes}
   $('#recipe-cards').html(recipeTemplate(recipes))
 }
 
