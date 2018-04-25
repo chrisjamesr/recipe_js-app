@@ -11,8 +11,8 @@
   </ul>
   <p id="js-directions"> <%= @recipe.directions %></p>
 </div>
-<p>
 
+<p>
   <%= show_edit_link %> <br>
   <footer>
     <button id="js-previous">Previous Recipe</button>  
@@ -20,17 +20,24 @@
     <button id="js-next">Next Recipe</button>
   </footer>
 </p>
-<!-- 
-<script id="recipe-template" type="text/x-handlebars-template">
+
+<script id="recipe-show-template" type="text/x-handlebars-template">
   <h1 id="js-recipe-title" data-user-id="{{id}}">{{title}}</h1> 
-  <h6 class="mb-2 text-muted" id="js-user" data-user-id="{{id}}">Submitted by <%#= link_to "{{name}}", user_recipes_path(@recipe.user), id: "js-user-link" %></h6>
+  <h6 class="mb-2 text-muted" id="js-user" data-user-id="{{id}}">Submitted by 
+    <%#= link_to "{{name}}", user_recipes_path(@recipe.user), id: "js-user-link" %>
+  </h6>
   <p> Approximate Cook Time:  <span id="js-cook-time">{{time}}</span>  Min </p>
   <p id="js-description"><em> {{description}}</em></p>
   <ul>
+    {{#recipe_ingredients}}
+      <li>{{name}} - {{quantity}} - {{preparation}}</li>
+    {{/recipe_ingredients}}
     <%# @recipe.recipe_ingredients.each do |recipe_ingredient| %>
-      <li> <%#= recipe_ingredient.ingredient.name %> - <%#=recipe_ingredient.quantity %>  <%#= recipe_ingredient.preparation %></li>
-      
-    <%# end %>
+    <!-- <li> 
+      <%#= recipe_ingredient.ingredient.name %> - <%#=recipe_ingredient.quantity %>  
+      <%#= recipe_ingredient.preparation %>
+    </li>  
+    <%# end %>-->
   </ul>
   <p id="js-directions"> {{directions}}</p>
-</script> -->
+</script>
