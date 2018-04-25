@@ -28,7 +28,7 @@ class RecipesController < ApplicationController
   end
   
   def index
-    # binding.pryx
+    # binding.pry
     if params[:user_id] && params[:order].present?      
       redirect_to "/recipes/#{params[:order]}"
     elsif params[:user_id]
