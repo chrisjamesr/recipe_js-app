@@ -28,8 +28,7 @@ function loadIndexedRecipes(tag){
 function displayIndexedRecipes(indexedRecipes){
   let recipeTemplateString = $('#recipe-template').html()
   let recipeTemplate = Handlebars.compile(recipeTemplateString);
-  let recipes = { recipes: indexedRecipes}
-  $('#recipe-cards').html(recipeTemplate(recipes))
+  $('#recipe-cards').html(recipeTemplate({ recipes: indexedRecipes}))
 }
 
       // Show Page Functions
@@ -52,7 +51,6 @@ function loadPrevious(){
         // Recipe Show Page Ajax
 
 function loadRecipeText(res){
-
   $('#js-description').text(res["description"])
   $('#js-directions').text(res["directions"])
   $('#js-cook-time').text(res["time"])
@@ -63,7 +61,6 @@ function loadRecipeText(res){
 function displayShowRecipe(res){
   let showRecipe = Recipe.findOrCreate(res)
   let recipeShowString = $('#recipe-show-template').html()
-  debugger
   let recipeShowTemplate = Handlebars.compile(recipeShowString);
   $('#recipe-body').html(recipeShowTemplate({recipe: showRecipe}))
 }
