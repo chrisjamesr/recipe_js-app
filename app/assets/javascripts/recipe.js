@@ -90,6 +90,7 @@ function createRecipe(){
       recipes.push(this);
       this.user.addRecipe(this);
       this.addRecipeIngredients(response.recipe_ingredients)
+      Ingredient.findOrCreateIngredients(response.ingredients)
     }
     static all(){
       return recipes;
