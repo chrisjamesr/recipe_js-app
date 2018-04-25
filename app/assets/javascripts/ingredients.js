@@ -7,6 +7,15 @@ function createIngredient(){
     constructor(ingredientObject){
     this.id = ingredientObject.id
     this.name = ingredientObject.name
+    ingredients.push(this)
+    }
+    static all(){
+      return ingredients
+    }  
+    static findOrCreateIngredients(res){
+      res.forEach(function(ingredient){
+        return Ingredient.all().find(i=> i.id === ingredient.id) || new Ingredient(ingredient)      
+      })
     }
   }
 }
