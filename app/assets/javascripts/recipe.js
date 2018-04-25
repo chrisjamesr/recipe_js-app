@@ -26,18 +26,10 @@ function loadIndexedRecipes(tag){
 
       // Index Page Functions
 function displayIndexedRecipes(indexedRecipes){
-  $('#recipe-cards').empty();
-  // Recipe.all().forEach(recipe=> displayRecipe(recipe))
   let recipeTemplateString = $('#recipe-template').html()
   let recipeTemplate = Handlebars.compile(recipeTemplateString);
   let recipes = { recipes: indexedRecipes}
   $('#recipe-cards').html(recipeTemplate(recipes))
-}
-
-function displayRecipe(recipes){
-  let recipeTemplate = $('#recipe-template').html()
-  let recipeTemplateString = Handlebars.compile(recipeTemplate);
-  $('#recipe-body').html(recipeTemplate(recipes))
 }
 
       // Show Page Functions
@@ -46,7 +38,7 @@ function loadNext(){
   let userUrl = $('#js-user-link').attr('href')
   let currentId = $('#js-recipe-title').data()["recipeId"]
   $.get(`${userUrl}/${currentId}`,{ new_recipe_id: currentId+1 },null,'json')
-    .done(loadRecipeText)  
+    .done(displayShowRecipe)  
 }
 
 function loadPrevious(){
@@ -54,12 +46,13 @@ function loadPrevious(){
   let userUrl = $('#js-user-link').attr('href')
   let currentId = $('#js-recipe-title').data()["recipeId"]
   $.get(`${userUrl}/${currentId}`,{ new_recipe_id: currentId+1 },null,'json')
-    .done(loadRecipeText)  
+    .done(displayShowRecipe)  
 }
 
         // Recipe Show Page Ajax
 
 function loadRecipeText(res){
+
   $('#js-description').text(res["description"])
   $('#js-directions').text(res["directions"])
   $('#js-cook-time').text(res["time"])
@@ -67,6 +60,13 @@ function loadRecipeText(res){
   $('#js-recipe-title').data().recipeId = res["id"]
 }
 
+function displayShowRecipe(res){
+  let showRecipe = Recipe.findOrCreate(res)
+  let recipeShowString = $('#recipe-show-template').html()
+  debugger
+  let recipeShowTemplate = Handlebars.compile(recipeShowString);
+  $('#recipe-body').html(recipeShowTemplate({recipe: showRecipe}))
+}
 
 
 // Helper Functions
@@ -102,6 +102,10 @@ function createRecipe(){
         return recipe.user.id === parseInt(userId)
       })
     }
+    static findOrCreate(res){
+      return Recipe.all().find(r=> r.id === res.id) || new Recipe(res)
+    }
+    // 
     addRecipeIngredients(recipeIngredientsArray){
       recipeIngredientsArray.forEach(function(item){
         this.recipeIngredients.push(new RecipeIngredient(item))
