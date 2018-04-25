@@ -5,7 +5,7 @@
   <p id="js-description"><em> <%= @recipe.description %></em></p>
   <ul>
     <% @recipe.recipe_ingredients.each do |recipe_ingredient| %>
-      <li> <%= recipe_ingredient.ingredient.name %> - <%#=recipe_ingredient.quantity %>  <%#= recipe_ingredient.preparation %></li>
+      <li> <%= recipe_ingredient.ingredient.name %> - <%=recipe_ingredient.quantity %>  <%= recipe_ingredient.preparation %></li>
       
     <% end %>
   </ul>
