@@ -40,6 +40,10 @@ function loadNext(){
     .done(displayShowRecipe)  
 }
 
+function displayIngredientRows(){
+  // Handlebars.registerHelper('list_ingredient', function())
+}
+
 function loadPrevious(){
   event.preventDefault()
   let userUrl = $('#js-user-link').attr('href')
@@ -89,8 +93,9 @@ function createRecipe(){
       this.recipeIngredients = []
       recipes.push(this);
       this.user.addRecipe(this);
-      this.addRecipeIngredients(response.recipe_ingredients)
       Ingredient.findOrCreateIngredients(response.ingredients)
+      this.addRecipeIngredients(response.recipe_ingredients)
+      
     }
     static all(){
       return recipes;
@@ -118,37 +123,10 @@ function createRecipeIngredient(){
     constructor(recipeIngredientObject){
       this.id = recipeIngredientObject.id
       this.recipeId = recipeIngredientObject.recipe_id
-      this.ingredientId = recipeIngredientObject.ingredient_id
       this.quantity = recipeIngredientObject.quantity
       this.preparation = recipeIngredientObject.preparation
-
+      this.ingredient = Ingredient.findIngredient(recipeIngredientObject.ingredient_id)
     }
   }
 }
 const RecipeIngredient = new createRecipeIngredient
-
-// function createUser(){
-//   let users = []
-//   return class User{
-//     constructor(responseUser){
-//       this.id = responseUser.id
-//       this.name = responseUser.name
-//       this.recipes = []
-//       users.push(this)
-//     }
-//     static recipes(){
-//       return this.recipes
-//     }
-//     static all(){
-//       return users
-//     }
-//     addRecipe(recipe){
-//       this.recipes.push(recipe);
-//     }
-//     static findOrCreateUser(userObj){
-//       return users.find(user=> user.id === userObj.id && user.name === userObj.name) || new User(userObj) 
-//     }
-//   }
-// }
-
-// const User = new createUser
