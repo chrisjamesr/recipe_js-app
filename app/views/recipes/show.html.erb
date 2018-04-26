@@ -31,8 +31,10 @@
   <p> Approximate Cook Time: {{recipe.time}}  Min </p>
   <p id="js-description"><em> {{recipe.description}}</em></p>
   <ul>
+    <!-- {{recipe.recipeIngredients}} -->
+
     {{#recipe.recipeIngredients}}
-      <li>{{name}} - {{quantity}} - {{preparation}}</li>
+      <li>{{ingredient.name}} - {{quantity}} - {{preparation}}</li>
     {{/recipe.recipeIngredients}}
   </ul>
   <p id="js-directions"> {{recipe.directions}}</p>
