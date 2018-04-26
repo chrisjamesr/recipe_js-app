@@ -1,6 +1,3 @@
-// # Place all the behaviors and hooks related to the matching controller here.
-// # All this logic will automatically be available in application.js.
-// # You can use CoffeeScript in this file: http://coffeescript.org/
 function createIngredient(){
   let ingredients = []
   return class Ingredient{
@@ -13,7 +10,6 @@ function createIngredient(){
       return ingredients
     }  
     static findIngredient(id){
-      // debugger
       return ingredients.find(i=> i.id === id);
     }
     static findOrCreateIngredients(res){
