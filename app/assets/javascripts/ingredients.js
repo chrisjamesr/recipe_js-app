@@ -12,9 +12,13 @@ function createIngredient(){
     static all(){
       return ingredients
     }  
+    static findIngredient(id){
+      // debugger
+      return ingredients.find(i=> i.id === id);
+    }
     static findOrCreateIngredients(res){
       res.forEach(function(ingredient){
-        return Ingredient.all().find(i=> i.id === ingredient.id) || new Ingredient(ingredient)      
+        return ingredients.find(i=> i.id === ingredient.id) || new Ingredient(ingredient)      
       })
     }
   }
