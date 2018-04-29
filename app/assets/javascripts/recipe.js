@@ -18,8 +18,8 @@ function loadIndexedRecipes(tag){
   let indexedRecipes = []
   $.get(userUrl, {user_id: userId} , null,'json')
     .done(function(response){
-      response.forEach(function(element){
-       return indexedRecipes.push(new Recipe(element))        
+      response.forEach(function(element){    
+       return indexedRecipes.push(Recipe.findOrCreate(element))        
     })
     displayIndexedRecipes(indexedRecipes)    
   })
