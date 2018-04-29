@@ -91,6 +91,7 @@ function createRecipe(){
       this.user = User.findOrCreateUser(response.user)
       this.directions = response.directions
       this.recipeIngredients = []
+      this.categories = Category.findOrCreateCategories(response.categories)
       recipes.push(this);
       this.user.addRecipe(this);
       Ingredient.findOrCreateIngredients(response.ingredients)
