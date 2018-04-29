@@ -6,6 +6,7 @@ function addEventListeners(){
   $('#js-next').on('click', ()=>loadNext())
   $('#js-previous').on('click', ()=>loadPrevious())
   $('.js-user-link').on('click', (tag)=>loadIndexedRecipes(tag))
+  // add event listener to recipe links
   // $('.js-user-recipe-link').on('click', (tag)=>loadShowRecipe(tag))
 }
 
@@ -25,6 +26,8 @@ function loadIndexedRecipes(tag){
   })
 }
 
+// function displays ajax rendered recipes in page 
+// requires additional partial for previous/next navigation
 function loadShowRecipe(tag){
   event.preventDefault()
   let recipeLink = tag.currentTarget.href
@@ -36,6 +39,7 @@ function displayIndexedRecipes(indexedRecipes){
   let recipeTemplateString = $('#recipe-template').html()
   let recipeTemplate = Handlebars.compile(recipeTemplateString);
   $('#recipe-cards').html(recipeTemplate({ recipes: indexedRecipes}))
+  // add event listener to newly rendered recipe links
   // $('.js-user-recipe-link').on('click', (tag)=>loadShowRecipe(tag))
 }
 
