@@ -35,6 +35,7 @@ function displayIndexedRecipes(indexedRecipes){
   let recipeTemplateString = $('#recipe-template').html()
   let recipeTemplate = Handlebars.compile(recipeTemplateString);
   $('#recipe-cards').html(recipeTemplate({ recipes: indexedRecipes}))
+  $('.js-user-recipe-link').on('click', (tag)=>loadShowRecipe(tag))
 }
 
       // Show Page Functions
