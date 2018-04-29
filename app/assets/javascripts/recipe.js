@@ -6,6 +6,7 @@ function addEventListeners(){
   $('#js-next').on('click', ()=>loadNext())
   $('#js-previous').on('click', ()=>loadPrevious())
   $('.js-user-link').on('click', (tag)=>loadIndexedRecipes(tag))
+  $('.js-user-recipe-link').on('click', (tag)=>loadShowRecipe(tag))
 }
 
  // Event Handlers
@@ -22,6 +23,11 @@ function loadIndexedRecipes(tag){
     })
     displayIndexedRecipes(indexedRecipes)    
   })
+}
+
+function loadShowRecipe(tag){
+  event.preventDefault()
+  debugger
 }
 
       // Index Page Functions
@@ -54,13 +60,13 @@ function loadPrevious(){
 
         // Recipe Show Page Ajax
 
-function loadRecipeText(res){
-  $('#js-description').text(res["description"])
-  $('#js-directions').text(res["directions"])
-  $('#js-cook-time').text(res["time"])
-  $('#js-recipe-title').text(res["title"])
-  $('#js-recipe-title').data().recipeId = res["id"]
-}
+// function loadRecipeText(res){
+//   $('#js-description').text(res["description"])
+//   $('#js-directions').text(res["directions"])
+//   $('#js-cook-time').text(res["time"])
+//   $('#js-recipe-title').text(res["title"])
+//   $('#js-recipe-title').data().recipeId = res["id"]
+// }
 
 function displayShowRecipe(res){
   let showRecipe = Recipe.findOrCreate(res)
@@ -72,11 +78,11 @@ function displayShowRecipe(res){
 
 // Helper Functions
 
-function getUserInfo(){
-  let userUrl = $(tag.target).attr('href')
-  let userId = userUrl.match(/\d+/)[0] 
-  return {url: userUrl, id: userId}
-}
+// function getUserInfo(){
+//   let userUrl = $(tag.target).attr('href')
+//   let userId = userUrl.match(/\d+/)[0] 
+//   return {url: userUrl, id: userId}
+// }
 
 // JS Model Objects 
 
