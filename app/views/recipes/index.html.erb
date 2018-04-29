@@ -13,6 +13,11 @@
         <a href="/users/{{user.id}}/recipes/{{id}}" class = "js-user-recipe-link">{{title}}</a>
       </h5>
        <div class="category-tag">
+        {{#categories}}
+        <span class="category-tag">
+          {{name}}
+        </span>  
+        {{/categories}}
        </div>
       <h6 class="card-subtitle mb-2 text-muted">Submitted by 
         <a href="/users/{{user.id}}/recipes/" class = "js-user-link">{{user.name}}</a> 
@@ -24,3 +29,4 @@
   <br> 
   {{/recipes}}
 </script>
+ 
