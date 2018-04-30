@@ -66,14 +66,6 @@ function loadPrevious(){
 
         // Recipe Show Page Ajax
 
-// function loadRecipeText(res){
-//   $('#js-description').text(res["description"])
-//   $('#js-directions').text(res["directions"])
-//   $('#js-cook-time').text(res["time"])
-//   $('#js-recipe-title').text(res["title"])
-//   $('#js-recipe-title').data().recipeId = res["id"]
-// }
-
 function displayShowRecipe(res){
   let showRecipe = Recipe.findOrCreate(res)
   let recipeShowString = $('#recipe-show-template').html()
