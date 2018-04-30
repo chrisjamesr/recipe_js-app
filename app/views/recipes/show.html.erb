@@ -1,4 +1,8 @@
 <div id="recipe-body">
+  <header>
+    <a href="#" id="js-previous">Previous Recipe</a>
+    <a href="#" id="js-next">Next Recipe</a>
+  </header>
   <h1 id="js-recipe-title" data-recipe-id="<%= @recipe.id %>" ><%= @recipe.title %></h1> 
   <h6 class="mb-2 text-muted" id="js-user" data-user-id="<%=@recipe.user.id%>">
     Submitted by <%= link_to @recipe.user.name, user_recipes_path(@recipe.user), id: "js-user-link" %>
@@ -16,25 +20,23 @@
 
 <p>
   <%= show_edit_link %> <br>
-  <footer>
-    <button id="js-previous">Previous Recipe</button>  
-    <br>
-    <button id="js-next">Next Recipe</button>
-  </footer>
 </p>
 
 <script id="recipe-show-template" type="text/x-handlebars-template">
+  <header>
+    <a href="#" id="js-previous">Previous Recipe</a>
+    <a href="#" id="js-next">Next Recipe</a>
+  </header>
   <h1 id="js-recipe-title" data-recipe-id="{{recipe.id}}">{{recipe.title}}</h1> 
+  
   <h6 class="mb-2 text-muted" id="js-user" data-user-id="{{recipe.user.id}}">Submitted by 
     <a href="/users/{{recipe.user.id}}/recipes" id="js-user-link">{{recipe.user.name}}</a>
   </h6>
   <p> Approximate Cook Time: {{recipe.time}}  Min </p>
   <p id="js-description"><em> {{recipe.description}}</em></p>
   <ul>
-    <!-- {{recipe.recipeIngredients}} -->
-
     {{#recipe.recipeIngredients}}
-      <li>{{ingredient.name}} - {{quantity}} - {{preparation}}</li>
+      <li>{{ingredient.name}} - {{quantity}} {{preparation}}</li>
     {{/recipe.recipeIngredients}}
   </ul>
   <p id="js-directions"> {{recipe.directions}}</p>
