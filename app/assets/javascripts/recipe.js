@@ -6,6 +6,7 @@ function addEventListeners(){
   $('#js-next').on('click', ()=>loadNext())
   $('#js-previous').on('click', ()=>loadPrevious())
   $('.js-user-link').on('click', (tag)=>loadIndexedRecipes(tag))
+  $('#js-add-ingredient').on('click', ()=>addIngredientRow())
   // add event listener to recipe links
   // $('.js-user-recipe-link').on('click', (tag)=>loadShowRecipe(tag))
 }
@@ -30,8 +31,44 @@ function loadIndexedRecipes(tag){
 // requires additional partial for previous/next navigation
 function loadShowRecipe(tag){
   event.preventDefault()
-  let recipeLink = tag.currentTarget.href
+  let recipeLink = tag.currentTarget.href 
   $.get(recipeLink,'',null,'json').done(displayShowRecipe)
+}
+
+function addIngredientRow(){
+  event.preventDefault();
+  
+  let ingredientKey = uniqueKey()
+  let ingredientNameAttribute = `recipe[ingredients_attributes][${ingredientKey}][name]`
+  let ingredientIdAttribute = `recipe_ingredients_attributes_${ingredientKey}_name`
+  let $ingredient = $("<input>", {
+    "placeholder": "Ingredient Name",
+    "type": "text",
+    "name": ingredientNameAttribute,
+    "id": ingredientIdAttribute 
+  })
+  let quantityKey = uniqueKey()
+  let quantityNameAttribute = `recipe[ingredients_attributes][${quantityKey}][recipe_ingredients][quantity]`
+  let quantityIdAttribute = `recipe_ingredients_attributes_${quantityKey}_recipe_ingredients_quantity`
+  let $quantity = $("<input>", {
+    "placeholder": "Quantity",
+    "type": "text",
+    "name": quantityNameAttribute,
+    "id": quantityIdAttribute 
+  })
+  let prepKey = uniqueKey()
+  let prepNameAttribute = `recipe[ingredients_attributes][${prepKey}][recipe_ingredients][preparation]`
+  let prepIdAttribute = `recipe_ingredients_attributes_${prepKey}_recipe_ingredients_preparation`
+  let $prep = $("<input>",{
+    "placeholder": "Preparation",
+    "type": "text",
+    "name": prepNameAttribute,
+    "id": prepIdAttribute 
+  })
+  let $ingredientRow = $(`<li></li>`).append($ingredient,[$quantity, $prep])
+  
+  $('#js-ingredients').append($ingredientRow)
+  
 }
 
       // Index Page Functions
@@ -75,7 +112,10 @@ function displayShowRecipe(res){
 
 
 // Helper Functions
-
+function uniqueKey(){
+    let date = new Date()
+    return date.getTime();
+}
 // function getUserInfo(){
 //   let userUrl = $(tag.target).attr('href')
 //   let userId = userUrl.match(/\d+/)[0] 
