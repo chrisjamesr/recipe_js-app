@@ -31,7 +31,7 @@
         <%= categories_fields.text_field :name, placeholder: "Category Name", :class=> "form-control"    %>
       <% end %>
     </div>
-    <div class="edit-form-section">
+    <div class="edit-form-section" >
       <%= f.label :ingredients %>
       <%= render :partial => "ingredients/ingredient", :locals => {:recipe => @recipe, :f => f} %>
     </div>    
