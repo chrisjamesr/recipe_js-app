@@ -65,8 +65,8 @@ function addIngredientRow(){
     "name": prepNameAttribute,
     "id": prepIdAttribute 
   })
-  let $ingredientRow = $(`<li></li>`).append($ingredient,[$quantity, $prep])
-  
+  let $ingredientRow = $(`<li></li>`).append($ingredient,[ " ",$quantity," ", $prep])
+
   $('#js-ingredients').append($ingredientRow)
   
 }
