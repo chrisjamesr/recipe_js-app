@@ -29,15 +29,15 @@ class Recipe < ApplicationRecord
       if ingredient_attribute.present?
         ingredient = Ingredient.find_or_create_by(:name => ingredient_attribute[:name]) 
         if !self.ingredients.include?(ingredient) && ingredient.valid?
-          self.recipe_ingredients.build(
+          self.recipe_ingredients.create(
             :ingredient => ingredient,
             :quantity => ingredient_attribute[:recipe_ingredients][:quantity], 
             :preparation => ingredient_attribute[:recipe_ingredients][:preparation]
           )     
         elsif recipe_ingredient = self.recipe_ingredients.find_by(:ingredient_id => ingredient.id, :recipe_id => self.id)
           recipe_ingredient.update(
-          :quantity => ingredient_attribute[:recipe_ingredients][:quantity], 
-          :preparation => ingredient_attribute[:recipe_ingredients][:preparation]
+            :quantity => ingredient_attribute[:recipe_ingredients][:quantity], 
+            :preparation => ingredient_attribute[:recipe_ingredients][:preparation]
           )
         end 
       end
@@ -47,7 +47,7 @@ class Recipe < ApplicationRecord
 
   def categories_attributes=(categories_attributes)
     categories_attributes.each do |i, category_attribute|
-      if category_attribute.present?
+      if category_attribute.present? & !category_attribute[:name].empty?
         category = Category.find_or_create_by(category_attribute)
         if !self.categories.include?(category)
           self.recipe_categories.build(:category => category)
