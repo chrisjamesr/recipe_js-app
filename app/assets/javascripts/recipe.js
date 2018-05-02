@@ -38,27 +38,27 @@ function loadShowRecipe(tag){
 function addIngredientRow(){
   event.preventDefault();
   
-  let ingredientKey = uniqueKey()
-  let ingredientNameAttribute = `recipe[ingredients_attributes][${ingredientKey}][name]`
-  let ingredientIdAttribute = `recipe_ingredients_attributes_${ingredientKey}_name`
+  let inputKey = uniqueKey()
+  let ingredientNameAttribute = `recipe[ingredients_attributes][${inputKey}][name]`
+  let ingredientIdAttribute = `recipe_ingredients_attributes_${inputKey}_name`
   let $ingredient = $("<input>", {
     "placeholder": "Ingredient Name",
     "type": "text",
     "name": ingredientNameAttribute,
     "id": ingredientIdAttribute 
   })
-  let quantityKey = uniqueKey()
-  let quantityNameAttribute = `recipe[ingredients_attributes][${quantityKey}][recipe_ingredients][quantity]`
-  let quantityIdAttribute = `recipe_ingredients_attributes_${quantityKey}_recipe_ingredients_quantity`
+  
+  let quantityNameAttribute = `recipe[ingredients_attributes][${inputKey}][recipe_ingredients][quantity]`
+  let quantityIdAttribute = `recipe_ingredients_attributes_${inputKey}_recipe_ingredients_quantity`
   let $quantity = $("<input>", {
     "placeholder": "Quantity",
     "type": "text",
     "name": quantityNameAttribute,
     "id": quantityIdAttribute 
   })
-  let prepKey = uniqueKey()
-  let prepNameAttribute = `recipe[ingredients_attributes][${prepKey}][recipe_ingredients][preparation]`
-  let prepIdAttribute = `recipe_ingredients_attributes_${prepKey}_recipe_ingredients_preparation`
+  
+  let prepNameAttribute = `recipe[ingredients_attributes][${inputKey}][recipe_ingredients][preparation]`
+  let prepIdAttribute = `recipe_ingredients_attributes_${inputKey}_recipe_ingredients_preparation`
   let $prep = $("<input>",{
     "placeholder": "Preparation",
     "type": "text",
