@@ -101,6 +101,10 @@ function loadPrevious(){
     .done(displayShowRecipe)  
 }
 
+function updateEditLink(recipe){
+  $('#js-edit-link').attr("href", `/users/${recipe.user.id}/recipes/${recipe.id}/edit`)
+}
+
         // Recipe Show Page Ajax
 
 function displayShowRecipe(res){
@@ -108,6 +112,7 @@ function displayShowRecipe(res){
   let recipeShowString = $('#recipe-show-template').html()
   let recipeShowTemplate = Handlebars.compile(recipeShowString);
   $('#recipe-body').html(recipeShowTemplate({recipe: showRecipe}))
+  updateEditLink(showRecipe)
 }
 
 
@@ -121,7 +126,9 @@ function uniqueKey(){
 //   let userId = userUrl.match(/\d+/)[0] 
 //   return {url: userUrl, id: userId}
 // }
-
+function currentRecipeEditForm(){
+return $('#js-recipe-title').data().recipeId
+}
 // JS Model Objects 
 
 function createRecipe(){
