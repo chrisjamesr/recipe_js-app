@@ -2,7 +2,7 @@ module RecipeHelper
 
   def recipe_new_or_edit(recipe)
     if recipe.new_record? 
-      6.times {recipe.ingredients.build}
+      4.times {recipe.ingredients.build}
     elsif recipe.persisted? && recipe.ingredients.empty?
      recipe.ingredients.build
     else 
