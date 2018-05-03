@@ -12,7 +12,8 @@ module RecipeIngredientsHelper
   
   def remove_recipe_ingredient(recipe_ingredient_object)
     if request.parameters[:action] == "edit" && @recipe.recipe_ingredients.present?
-      link_to "x", remove_ingredient_path(recipe_ingredient_object), :method => "delete"
+      # raise recipe_ingredient_object.inspect
+      link_to "x", "#" , :method => "delete", id: "js-remove-link", data:{id: recipe_ingredient_object.id, recipe_id: recipe_ingredient_object.recipe_id}
     end
   end
 
