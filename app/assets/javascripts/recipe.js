@@ -14,26 +14,25 @@ function addEventListeners(){
 
  // Event Handlers
 
-function removeIngredientRow(tag){
+function destroyRecipeIngredient(tag){
   event.stopImmediatePropagation()
-  
   let riId = tag.target.dataset.id
-  let data = {"id": riId}
   let recipeId = tag.target.dataset.recipeId
-  let token = $( 'meta[name="csrf-token"]' ).attr( 'content' )
-  // let url = `/recipes/${recipeId}/recipe_ingredients/${riId}?authenticity_token='${token}'`
+  // let token = $( 'meta[name="csrf-token"]' ).attr( 'content' )
   let url = `/recipes/${recipeId}/recipe_ingredients/${riId}`
-  debugger
 
   $.ajax({
     method: 'DELETE',
     data: {id: riId}.to_json,
     url : url,
     contentType: "application/json; charset=utf-8", 
-    dataType: "json"    
-  }).done(function(response){
-    debugger
-  })
+    dataType: "json",    
+    success: removeIngredientRow
+  })  
+}
+
+function removeIngredientRow(tag){
+  $(tag.target).parent().remove()
 }
 
 function loadIndexedRecipes(tag){
