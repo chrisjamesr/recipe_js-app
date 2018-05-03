@@ -7,11 +7,34 @@ function addEventListeners(){
   $('#js-previous').on('click', ()=>loadPrevious())
   $('.js-user-link').on('click', (tag)=>loadIndexedRecipes(tag))
   $('#js-add-ingredient').on('click', ()=>addIngredientRow())
+  $('#js-ingredients').on('click', 'a', (tag)=>removeIngredientRow(tag))
   // add event listener to recipe links
   // $('.js-user-recipe-link').on('click', (tag)=>loadShowRecipe(tag))
 }
 
  // Event Handlers
+
+function removeIngredientRow(tag){
+  event.stopImmediatePropagation()
+  
+  let riId = tag.target.dataset.id
+  let data = {"id": riId}
+  let recipeId = tag.target.dataset.recipeId
+  let token = $( 'meta[name="csrf-token"]' ).attr( 'content' )
+  // let url = `/recipes/${recipeId}/recipe_ingredients/${riId}?authenticity_token='${token}'`
+  let url = `/recipes/${recipeId}/recipe_ingredients/${riId}`
+  debugger
+
+  $.ajax({
+    method: 'DELETE',
+    data: {id: riId}.to_json,
+    url : url,
+    contentType: "application/json; charset=utf-8", 
+    dataType: "json"    
+  }).done(function(response){
+    debugger
+  })
+}
 
 function loadIndexedRecipes(tag){
   event.preventDefault()
