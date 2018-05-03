@@ -5,7 +5,9 @@
         <%= ingredients_fields.text_field :name, placeholder: "Ingredient Name" %>
         <%= ingredients_fields.fields_for :recipe_ingredients, recipe_ingredient_new_or_edit(recipe, ingredients_fields.object) do |recipe_ingredient| %>
           <%= recipe_ingredient.text_field :quantity, :placeholder => "Quantity" %>
-          <%= recipe_ingredient.text_field :preparation, :placeholder => "Preparation" %>          <%= remove_recipe_ingredient(recipe_ingredient.object) %> 
+          <%= recipe_ingredient.text_field :preparation, :placeholder => "Preparation" %>
+          <%= remove_recipe_ingredient(recipe_ingredient.object) %> 
+          <% hidden_field_tag :authenticity_token, form_authenticity_token %>
         <% end %>
       </li>
     <!-- </p> -->
