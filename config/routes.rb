@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   get '/categories' => 'categories#index'
 
 
-  delete '/recipes/:id/recipe_ingredients/:id', :to => 'recipe_ingredients#destroy', :as => :remove_ingredient
+  delete '/recipes/:recipe_id/recipe_ingredients/:id', :to => 'recipe_ingredients#destroy', :as => :remove_ingredient
 
   get '/recipes/newest' => 'recipes#newest'
   get '/recipes/oldest' => 'recipes#oldest'
