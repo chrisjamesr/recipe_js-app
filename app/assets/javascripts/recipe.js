@@ -6,34 +6,11 @@ function addEventListeners(){
   $('#js-next').on('click', ()=>loadNext())
   $('#js-previous').on('click', ()=>loadPrevious())
   $('.js-user-link').on('click', (tag)=>loadIndexedRecipes(tag))
-  $('#js-add-ingredient').on('click', ()=>addIngredientRow())
-  $('#js-ingredients').on('click', 'a', (tag)=>removeIngredientRow(tag))
-  // add event listener to recipe links
+    // add event listener to recipe links
   // $('.js-user-recipe-link').on('click', (tag)=>loadShowRecipe(tag))
 }
 
  // Event Handlers
-
-function destroyRecipeIngredient(tag){
-  event.stopImmediatePropagation()
-  let riId = tag.target.dataset.id
-  let recipeId = tag.target.dataset.recipeId
-  // let token = $( 'meta[name="csrf-token"]' ).attr( 'content' )
-  let url = `/recipes/${recipeId}/recipe_ingredients/${riId}`
-
-  $.ajax({
-    method: 'DELETE',
-    data: {id: riId}.to_json,
-    url : url,
-    contentType: "application/json; charset=utf-8", 
-    dataType: "json",    
-    success: removeIngredientRow
-  })  
-}
-
-function removeIngredientRow(tag){
-  $(tag.target).parent().remove()
-}
 
 function loadIndexedRecipes(tag){
   event.preventDefault()
@@ -55,42 +32,6 @@ function loadShowRecipe(tag){
   event.preventDefault()
   let recipeLink = tag.currentTarget.href 
   $.get(recipeLink,'',null,'json').done(displayShowRecipe)
-}
-
-function addIngredientRow(){
-  event.preventDefault();
-  
-  let inputKey = uniqueKey()
-  let ingredientNameAttribute = `recipe[ingredients_attributes][${inputKey}][name]`
-  let ingredientIdAttribute = `recipe_ingredients_attributes_${inputKey}_name`
-  let $ingredient = $("<input>", {
-    "placeholder": "Ingredient Name",
-    "type": "text",
-    "name": ingredientNameAttribute,
-    "id": ingredientIdAttribute 
-  })
-  
-  let quantityNameAttribute = `recipe[ingredients_attributes][${inputKey}][recipe_ingredients][quantity]`
-  let quantityIdAttribute = `recipe_ingredients_attributes_${inputKey}_recipe_ingredients_quantity`
-  let $quantity = $("<input>", {
-    "placeholder": "Quantity",
-    "type": "text",
-    "name": quantityNameAttribute,
-    "id": quantityIdAttribute 
-  })
-  
-  let prepNameAttribute = `recipe[ingredients_attributes][${inputKey}][recipe_ingredients][preparation]`
-  let prepIdAttribute = `recipe_ingredients_attributes_${inputKey}_recipe_ingredients_preparation`
-  let $prep = $("<input>",{
-    "placeholder": "Preparation",
-    "type": "text",
-    "name": prepNameAttribute,
-    "id": prepIdAttribute 
-  })
-  let $ingredientRow = $(`<li></li>`).append($ingredient,[ " ",$quantity," ", $prep])
-
-  $('#js-ingredients').append($ingredientRow)
-  
 }
 
       // Index Page Functions
@@ -137,12 +78,7 @@ function displayShowRecipe(res){
   updateEditLink(showRecipe)
 }
 
-
 // Helper Functions
-function uniqueKey(){
-    let date = new Date()
-    return date.getTime();
-}
 // function getUserInfo(){
 //   let userUrl = $(tag.target).attr('href')
 //   let userId = userUrl.match(/\d+/)[0] 
