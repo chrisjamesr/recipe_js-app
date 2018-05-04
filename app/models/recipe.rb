@@ -4,6 +4,7 @@ class Recipe < ApplicationRecord
   has_many :ingredients, :through => :recipe_ingredients
   has_many :recipe_categories
   has_many :categories, :through => :recipe_categories
+  has_many :comments
 
   validates :title, :description, :directions, presence: true, allow_blank: false
   validates :title, :uniqueness => {:case_sensitive => false}
