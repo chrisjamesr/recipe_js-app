@@ -60,7 +60,7 @@ function addIngredientRow(){
   let $ingredientRow = $(`<li></li>`).append($ingredient,[ " ",$quantity," ", $prep])
 
   $('#js-ingredients').append($ingredientRow)
-  
+  $('div#js-ingredients li:last-child input:first-child').focus()
 }
 
 // Helper Functions
