@@ -10,13 +10,35 @@ function addCommentEventListeners(){
 
 function addCommentField(){
   event.stopPropagation()
-  let $commentField = $("<input>",{
+  // disable addcommentbutton
+  let $commentField = $("<textarea>",{
     "placeholder": "Add Comment...",
+    "id": "js-comment-input",
     "type": "text",
-    "name": "comment"
+    "name": "comment",
+    "autofocus": true,
+    "rows": "1",
+    "cols": "70",
+    "wrap": "hard"
   })
+
+  let $commentButton = $("<button>Submit</button>", {
+    "value": "Submit",
+    "type": "button",
+  })
+  $commentButton.on('click', postComment)
   // $('#comments')
+  let $commentForm = $("<form>", {
+    "id": "js-comment-form"
+    })
+  let $addCommentDiv = $("<div></div>",{
+    "id": "js-comment-div"
+  }).append($commentField,[$commentButton])
+
+  $($addCommentDiv).insertBefore($('#comments'))
+
 }
+
 function loadComments(){
   event.stopPropagation()
   const recipeId = this.dataset.recipeId
@@ -28,7 +50,7 @@ function loadComments(){
 }
 
 function postComment(){
-  
+  alert('postComment')
   // const commentText;
   // const url;
   $.ajax({
