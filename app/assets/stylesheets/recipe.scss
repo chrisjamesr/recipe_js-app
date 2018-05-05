@@ -67,6 +67,24 @@ div.first-row{
     width: 48%;
   }
 }
+#js-comment-div{
+  margin: 10px 0;
+  // padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; 
+
+  #js-comment-input {
+    flex:3, 1, 70%;
+    margin-right: 10px;
+  }
+  button {
+
+  }
+}
+
+
+
 
 div#filter {
   margin: 21px 0 8px 0;
