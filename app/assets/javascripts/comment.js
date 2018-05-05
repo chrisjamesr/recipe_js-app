@@ -1,3 +1,29 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+
+function loadComments(){
+  const url;
+  $.ajax({
+      method: "GET",
+      url: '/recipes/4/comments',
+      dataType: 'json'
+    }).done(showComments)
+}
+
+function postComment(){
+  const commentText;
+  const url;
+  $.ajax({
+    method: "POST",
+    url: '/recipes/4/comments',
+    data: {text: ""},
+    dataType: 'json'
+  }).done(prependComment)
+    
+}
+
+function showComments(){
+
+}
+
+function prependComment(){
+
+}
