@@ -21,7 +21,6 @@ function addCommentField(){
     "cols": "70",
     "wrap": "hard"
   })
-
   let $commentButton = $("<button>Submit</button>", {
     "value": "Submit",
     "type": "button",
@@ -34,7 +33,7 @@ function addCommentField(){
   let $addCommentDiv = $("<div></div>",{
     "id": "js-comment-div"
   }).append($commentField,[$commentButton])
-
+  
   $($addCommentDiv).insertBefore($('#comments'))
 
 }
