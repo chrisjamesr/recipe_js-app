@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
 
   def index
     # binding.pry
-    recipe = Recipe.find(params[:recipe_id])
+    recipe = Recipe.find(params[:id])
     @comments = recipe.comments
     respond_to do |format|
       format.html { render layout: false}
@@ -13,13 +13,11 @@ class CommentsController < ApplicationController
 
   def create
     recipe = Recipe.find(comment_params[:id])
-    # user = current_user
     @comment = Comment.new(:recipe_id => recipe.id, :user_id => current_user.id, :text => comment_params[:text])
     if @comment.save
-      binding.pry
-      render json: @comment
+      render json: @comment, status: 201
     else
-      render json: @comment.errors.full_messages
+      render json: @comment.errors.full_messages 
     end
     
 
