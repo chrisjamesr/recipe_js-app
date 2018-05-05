@@ -2,13 +2,9 @@ class CommentsController < ApplicationController
   before_action :current_user
 
   def index
-    # binding.pry
     recipe = Recipe.find(params[:id])
     @comments = recipe.comments
-    respond_to do |format|
-      format.html { render layout: false}
-      format.json { render json: @comments,  status: 200}
-    end
+    render json: @comments,  status: 200
   end
 
   def create
