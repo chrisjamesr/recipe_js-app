@@ -18,9 +18,11 @@
   <p id="js-directions"> <%= @recipe.directions %></p>
 </div>
 
-<p>
+<div class="d-flex justify-content-around">
+  <%= link_to "Add Comment", "#", id: "add-comment", data:{recipe_id: @recipe.id}%>
+  <%= link_to "Show Comments", "#", id: "show-comments", data:{recipe_id: @recipe.id}%>
   <%= show_edit_link %> <br>
-</p>
+</div>
 
 <script id="recipe-show-template" type="text/x-handlebars-template">
   <header>
