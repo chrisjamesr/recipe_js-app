@@ -12,10 +12,20 @@ Rails.application.routes.draw do
   
 
   resources :users do
-    resources :recipes 
+    resources :recipes
   end
-  resources :ingredients, :recipes, :only => [:index] 
+  get '/recipes/:id/comments' => 'comments#index'
+  post '/recipes/:id/comments' => 'comments#create'
+  
+  # resources :users do
+  #   resources :recipes do
+  #     resources :comments, :only => [:index, :create]
+  #   end
+  # end
 
+  
+
+  resources :ingredients, :recipes, :only => [:index] 
   get '/categories' => 'categories#index'
 
 
@@ -27,5 +37,5 @@ Rails.application.routes.draw do
   get '/recipes/longest' => 'recipes#longest'
   get '/recipes/shortest' => 'recipes#shortest'  
   get '/users/:id/recipes/:id/recipe_data', to: 'recipes#recipe_data'
-  # root
+  
 end
