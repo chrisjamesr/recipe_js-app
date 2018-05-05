@@ -45,6 +45,7 @@ function displayIndexedRecipes(indexedRecipes){
 
       // Show Page Functions
 function loadNext(){
+  $('#comments').empty()
   event.preventDefault()
   let userUrl = $('#js-user-link').attr('href')
   let currentId = $('#js-recipe-title').data()["recipeId"]
@@ -57,6 +58,7 @@ function displayIngredientRows(){
 }
 
 function loadPrevious(){
+  $('#comments').empty()
   event.preventDefault()
   let userUrl = $('#js-user-link').attr('href')
   let currentId = $('#js-recipe-title').data()["recipeId"]
