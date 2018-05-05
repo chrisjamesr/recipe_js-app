@@ -1,8 +1,8 @@
 $(document).on('turbolinks:load', function(){
-  addEventListeners()
+  addRecipeEventListeners()
 })
 
-function addEventListeners(){
+function addRecipeEventListeners(){
   $('#js-next').on('click', ()=>loadNext())
   $('#js-previous').on('click', ()=>loadPrevious())
   $('.js-user-link').on('click', (tag)=>loadIndexedRecipes(tag))
