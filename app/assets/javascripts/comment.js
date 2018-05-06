@@ -72,7 +72,6 @@ function postComment(){
     data: {text: commentText},
     dataType: 'json'
   }).done(prependComment)
-  // $('#js-comment-div').remove()  
   $('#js-comment-input').val('')  
 }
 
