@@ -48,20 +48,18 @@ function loadComments(){
 }
 
 function showComments(commentsResponse){
+  $('#show-comments').css('visibility','hidden')
   let $commentTemplate = $('<div>', { "id": "comments"})
-  if (commentsResponse.length === 0){
-    addCommentField()
-  } else {  
-    commentsResponse.forEach(function(comment){
-      // add each comment individually 
-      prependComment(comment)
+  let currentComments = $('#comments').children()
+  addCommentField()
+  if (commentsResponse.length > 0 ) {  
+    for (let i = 0; i < commentsResponse.length; i++){    
+      prependComment(commentsResponse[i])
       // let userLink = `<a href="/users/${comment.user_id}/recipes">${comment.user_name}</a>`
       // let $commentString = $(`<p>${userLink}<br>${comment.text}</p>`)    
       // $('#comments').prepend($commentString)
-    })
+    }
     // $('#comments').append($commentTemplate)
-    addCommentField()
-   
   }
 }
 
@@ -80,11 +78,16 @@ function postComment(){
 
 function prependComment(comment){
   let userLink = `<a href="/users/${comment.user_id}/recipes">${comment.user_name}</a>`
-  let $commentString = $(`<p>${userLink}<br>${comment.text}</p>`)    
+  let $commentString = $(`<p>${comment.text} - ${userLink}</p>`)    
   $('#comments').prepend($commentString)
 }
 
+function toggleCommentLink(){
+  $('#show-comments').toggleClass('hidden')
+}
+
 function clearComments(){
+  $('#show-comments').css('visibility','visible')
   $('#js-comment-div').remove()
   $('#comments').empty()
 }
