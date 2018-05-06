@@ -44,7 +44,7 @@ function loadComments(){
       method: "GET",
       url: `/recipes/${recipeId}/comments`,
       dataType: 'json'
-    }).done(showComments)
+  }).done(showComments)
 }
 
 function showComments(commentsResponse){
