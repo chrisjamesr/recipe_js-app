@@ -2,11 +2,9 @@ $(document).on('turbolinks:load', function(){
   addCommentEventListeners()
 })
 
-
 function addCommentEventListeners(){
   $("#show-comments").on('click', loadComments)
 }
-
 
 function addCommentField(){
   event.stopPropagation()
