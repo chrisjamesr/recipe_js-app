@@ -3,6 +3,26 @@
   They will automatically be included in application.css.
 */
 
+#js-comment-div{
+  margin: 10px 0;
+  // padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start; 
+
+  #js-comment-input {
+    flex:3, 1, 70%;
+    margin-right: 10px;
+  }
+  button {
+
+  }
+}
+
 div#comments {
   margin-top: 20px;
+}
+
+.hidden { 
+  visibility: hidden;
 }
