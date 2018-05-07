@@ -43,8 +43,9 @@ function loadComments(){
       url: `/recipes/${recipeId}/comments`,
       dataType: 'json'
   }).done(function(commentResponse){
-    return commentResponse.map(commentObject=> new Comment(commentObject))
-  }).done(showComments)
+    let commentObjectArray = commentResponse.map(commentObject=> new Comment(commentObject))
+    showComments(commentObjectArray)
+  })
 }
 
 function showComments(commentObjectArray){
@@ -71,13 +72,11 @@ function postComment(){
     url: `/recipes/${recipeId}/comments`,
     data: {text: commentText},
     dataType: 'json'
-  }).done(response=> new Comment(response)).done(function(commentObject){ debugger})
-  // prependComment)
+  }).done((response)=> prependComment(new Comment(response)))
   $('#js-comment-input').val('')  
 }
 
 function prependComment(comment){
-  debugger
   let userLink = `<a href="/users/${comment.userId}/recipes">${comment.userName}</a>`
   let $commentString = $(`<p>${comment.text} - ${userLink}</p>`)    
   $('#comments').prepend($commentString)
@@ -124,7 +123,6 @@ function createComment(){
     constructor(commentObject){
       this.userId = commentObject.user_id
       this.userName = commentObject.user_name
-      debugger
       this.text = commentObject.text
       comments.push(this)
     }
