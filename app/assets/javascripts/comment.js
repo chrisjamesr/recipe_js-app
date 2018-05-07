@@ -43,7 +43,7 @@ function loadComments(){
       url: `/recipes/${recipeId}/comments`,
       dataType: 'json'
   }).done(function(commentResponse){
-    commentResponse.map(commentObject=> new Comment(commentObject))
+    return commentResponse.map(commentObject=> new Comment(commentObject))
   }).done(showComments)
 }
 
@@ -54,7 +54,7 @@ function showComments(commentObjectArray){
   addCommentField()
   if (commentObjectArray.length > 0 ) {  
     for (let i = 0; i < commentObjectArray.length; i++){    
-      prependComment(commentObjectArray[i])
+      prependComment(Comment.all()[i])
       // let userLink = `<a href="/users/${comment.user_id}/recipes">${comment.user_name}</a>`
       // let $commentString = $(`<p>${userLink}<br>${comment.text}</p>`)    
       // $('#comments').prepend($commentString)
@@ -71,12 +71,14 @@ function postComment(){
     url: `/recipes/${recipeId}/comments`,
     data: {text: commentText},
     dataType: 'json'
-  }).done(prependComment)
+  }).done(response=> new Comment(response)).done(function(commentObject){ debugger})
+  // prependComment)
   $('#js-comment-input').val('')  
 }
 
 function prependComment(comment){
-  let userLink = `<a href="/users/${comment.user_id}/recipes">${comment.user_name}</a>`
+  debugger
+  let userLink = `<a href="/users/${comment.userId}/recipes">${comment.userName}</a>`
   let $commentString = $(`<p>${comment.text} - ${userLink}</p>`)    
   $('#comments').prepend($commentString)
 }
@@ -93,7 +95,7 @@ function clearComments(){
 
 // NOT IN USE
 function displayComment(commentString){
-  let $commentString = $(`<p>${comment.user_name}<br>${comment.text}</p>`)   
+  let $commentString = $(`<p>${comment.userName}<br>${comment.text}</p>`)   
   $('#comments').append($commentTemplate)
 }
 
@@ -120,8 +122,8 @@ function createComment(){
   comments = []
   return class Comment{
     constructor(commentObject){
-      this.user_id = commentObject.user_id
-      this.user_name = commentObject.user_name
+      this.userId = commentObject.user_id
+      this.userName = commentObject.user_name
       debugger
       this.text = commentObject.text
       comments.push(this)
