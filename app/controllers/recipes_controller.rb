@@ -17,7 +17,6 @@ class RecipesController < ApplicationController
   end
 
   def create
-    binding.pry
     @recipe = Recipe.new(recipe_params)
     if @recipe.save
       redirect_to user_recipe_path(@recipe.user, @recipe), {:notice => "Success! New Recipe Added."}
