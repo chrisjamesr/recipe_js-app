@@ -17,7 +17,7 @@ function createUser(){
       this.recipes.push(recipe);
     }
     static findOrCreateUser(userObj){
-      return users.find(user=> user.id === userObj.id && user.name === userObj.name) || new User(userObj) 
+      return users.find(user=> user.id === userObj.id) || new User(userObj) 
     }
   }
 }
