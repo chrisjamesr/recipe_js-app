@@ -113,3 +113,23 @@ function addCommentLink(){
 
   $('#show-comments').after($($commentLink))
 }
+
+function createComment(){
+  comments = []
+  return class Comment{
+    constructor(commentObject){
+      debugger
+      this.userId = commentObject.user_id
+      this.userName = commentObject.user_name
+      this.text = commentObject.text
+      comments.push(this)
+    }
+    static all(){
+      return comments
+    }
+    userPath(){
+     return `/users/${this.userId}/recipes`
+    }
+  }
+}
+const Comment = new createComment()
