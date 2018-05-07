@@ -129,16 +129,3 @@ function createRecipe(){
   }  
 }
 const Recipe = new createRecipe
-
-function createRecipeIngredient(){
-  return class RecipeIngredient{
-    constructor(recipeIngredientObject){
-      this.id = recipeIngredientObject.id
-      this.recipeId = recipeIngredientObject.recipe_id
-      this.quantity = recipeIngredientObject.quantity
-      this.preparation = recipeIngredientObject.preparation
-      this.ingredient = Ingredient.findIngredient(recipeIngredientObject.ingredient_id)
-    }
-  }
-}
-const RecipeIngredient = new createRecipeIngredient
