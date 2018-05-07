@@ -42,17 +42,19 @@ function loadComments(){
       method: "GET",
       url: `/recipes/${recipeId}/comments`,
       dataType: 'json'
+  }).done(function(commentResponse){
+    commentResponse.map(commentObject=> new Comment(commentObject))
   }).done(showComments)
 }
 
-function showComments(commentsResponse){
+function showComments(commentObjectArray){
   $('#show-comments').css('visibility','hidden')
   let $commentTemplate = $('<div>', { "id": "comments"})
-  let currentComments = $('#comments').children()
+  // let currentComments = $('#comments').children()
   addCommentField()
-  if (commentsResponse.length > 0 ) {  
-    for (let i = 0; i < commentsResponse.length; i++){    
-      prependComment(commentsResponse[i])
+  if (commentObjectArray.length > 0 ) {  
+    for (let i = 0; i < commentObjectArray.length; i++){    
+      prependComment(commentObjectArray[i])
       // let userLink = `<a href="/users/${comment.user_id}/recipes">${comment.user_name}</a>`
       // let $commentString = $(`<p>${userLink}<br>${comment.text}</p>`)    
       // $('#comments').prepend($commentString)
@@ -118,9 +120,9 @@ function createComment(){
   comments = []
   return class Comment{
     constructor(commentObject){
+      this.user_id = commentObject.user_id
+      this.user_name = commentObject.user_name
       debugger
-      this.userId = commentObject.user_id
-      this.userName = commentObject.user_name
       this.text = commentObject.text
       comments.push(this)
     }
