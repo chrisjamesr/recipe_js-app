@@ -67,8 +67,9 @@ function addIngredientRow(){
 function uniqueKey(){
     let date = new Date()
     return date.getTime();
+}
 
-function createRecipeIngredient(){
+ function createRecipeIngredient(){
   return class RecipeIngredient{
     constructor(recipeIngredientObject){
       this.id = recipeIngredientObject.id
@@ -81,4 +82,3 @@ function createRecipeIngredient(){
 }
 const RecipeIngredient = new createRecipeIngredient
    
-}
