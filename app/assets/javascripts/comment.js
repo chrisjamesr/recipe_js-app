@@ -51,16 +51,11 @@ function loadComments(){
 function showComments(commentObjectArray){
   $('#show-comments').css('visibility','hidden')
   let $commentTemplate = $('<div>', { "id": "comments"})
-  // let currentComments = $('#comments').children()
   addCommentField()
   if (commentObjectArray.length > 0 ) {  
     for (let i = 0; i < commentObjectArray.length; i++){    
       prependComment(Comment.all()[i])
-      // let userLink = `<a href="/users/${comment.user_id}/recipes">${comment.user_name}</a>`
-      // let $commentString = $(`<p>${userLink}<br>${comment.text}</p>`)    
-      // $('#comments').prepend($commentString)
     }
-    // $('#comments').append($commentTemplate)
   }
 }
 
@@ -93,29 +88,29 @@ function clearComments(){
 }
 
 // NOT IN USE
-function displayComment(commentString){
-  let $commentString = $(`<p>${comment.userName}<br>${comment.text}</p>`)   
-  $('#comments').append($commentTemplate)
-}
+// function displayComment(commentString){
+//   let $commentString = $(`<p>${comment.userName}<br>${comment.text}</p>`)   
+//   $('#comments').append($commentTemplate)
+// }
 
 // NOT IN USE
-function hideComments(){
-  $('#js-comment-div').remove()
-  $('#show-comments').text("Hide Comments").on('click', clearComments)
-}
+// function hideComments(){
+//   $('#js-comment-div').remove()
+//   $('#show-comments').text("Hide Comments").on('click', clearComments)
+// }
 
 // NOT IN USE
-function addCommentLink(){
-  let recipeId = $('#js-recipe-title').data().recipeId
-  let $commentLink = $("<a>",{
-    text: "Add A Comment",
-    "href": "#",
-    "id": "js-add-comment",
-    "data-recipe-id": recipeId,
-  }).on('click', addCommentField)
+// function addCommentLink(){
+//   let recipeId = $('#js-recipe-title').data().recipeId
+//   let $commentLink = $("<a>",{
+//     text: "Add A Comment",
+//     "href": "#",
+//     "id": "js-add-comment",
+//     "data-recipe-id": recipeId,
+//   }).on('click', addCommentField)
 
-  $('#show-comments').after($($commentLink))
-}
+//   $('#show-comments').after($($commentLink))
+// }
 
 function createComment(){
   comments = []
