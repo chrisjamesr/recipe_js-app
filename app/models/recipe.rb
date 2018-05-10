@@ -78,7 +78,7 @@ class Recipe < ApplicationRecord
       elsif new_recipe_id.to_i < current_recipe_id.to_i
         # previous
         # binding.pry
-        if recipe = Recipe.where("user_id = ?",user_id).where("id < ?",current_id).first
+        if recipe = Recipe.where("user_id = ?",user_id).where("id < ?",current_recipe_id).first
           recipe
         else
           recipe = Recipe.where("user_id = ?", user_id).last
