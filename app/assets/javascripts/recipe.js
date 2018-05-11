@@ -62,7 +62,7 @@ function loadPrevious(){
   event.preventDefault()
   let userUrl = $('#js-user-link').attr('href')
   let currentId = $('#js-recipe-title').data()["recipeId"]
-  $.get(`${userUrl}/${currentId}`,{ new_recipe_id: currentId+1 },null,'json')
+  $.get(`${userUrl}/${currentId}`,{ new_recipe_id: currentId-1 },null,'json')
     .done(displayShowRecipe)  
 }
 
@@ -78,6 +78,7 @@ function displayShowRecipe(res){
   let recipeShowTemplate = Handlebars.compile(recipeShowString);
   $('#recipe-body').html(recipeShowTemplate({recipe: showRecipe}))
   updateEditLink(showRecipe)
+  addRecipeEventListeners()
 }
 
 // Helper Functions
