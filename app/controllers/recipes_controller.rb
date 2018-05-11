@@ -45,7 +45,7 @@ class RecipesController < ApplicationController
     end
   end
   
-  def show    
+  def show 
     @recipe = Recipe.find_recipe(params[:user_id], params[:new_recipe_id], params[:id])
     respond_to do |format|
       format.html { render :show }
