@@ -49,7 +49,6 @@ function loadComments(){
 }
 
 function showComments(commentObjectArray){
-  debugger
   $('#show-comments').css('visibility','hidden')
   let $commentTemplate = $('<div>', { "id": "comments"})
 
@@ -118,7 +117,6 @@ function createComment(){
   comments = []
   return class Comment{
     constructor(commentObject){
-      debugger
       this.recipe = Recipe.findRecipe(commentObject.recipe_id)
       this.userId = commentObject.user_id
       this.userName = commentObject.user_name
