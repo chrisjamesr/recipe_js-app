@@ -111,12 +111,16 @@ function createRecipe(){
       this.categories = Category.findOrCreateCategories(response.categories)
       recipes.push(this);
       this.user.addRecipe(this);
+      this.comments = []
       Ingredient.findOrCreateIngredients(response.ingredients)
       this.addRecipeIngredients(response.recipe_ingredients)
       
     }
     static all(){
       return recipes;
+    }
+    static findRecipe(recipeId){
+      return recipes.find(r=> r.id === recipeId)
     }
     static userRecipes(userId){
       return Recipe.all().filter(function(recipe){
