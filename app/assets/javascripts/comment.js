@@ -49,12 +49,14 @@ function loadComments(){
 }
 
 function showComments(commentObjectArray){
+  debugger
   $('#show-comments').css('visibility','hidden')
   let $commentTemplate = $('<div>', { "id": "comments"})
+
   addCommentField()
   if (commentObjectArray.length > 0 ) {  
     for (let i = 0; i < commentObjectArray.length; i++){    
-      prependComment(Comment.all()[i])
+      prependComment(commentObjectArray[i])
     }
   }
 }
@@ -116,10 +118,16 @@ function createComment(){
   comments = []
   return class Comment{
     constructor(commentObject){
+      debugger
+      this.recipe = Recipe.findRecipe(commentObject.recipe_id)
       this.userId = commentObject.user_id
       this.userName = commentObject.user_name
       this.text = commentObject.text
       comments.push(this)
+
+      if (this.recipe){
+        this.recipe.comments.push(this)
+      }
     }
     static all(){
       return comments
