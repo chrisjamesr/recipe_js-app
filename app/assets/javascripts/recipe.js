@@ -1,13 +1,18 @@
 $(document).on('turbolinks:load', function(){
-  addRecipeEventListeners()
+  addIndexEventListeners()
+  addShowEventListeners()
 })
 
-function addRecipeEventListeners(){
-  $('#js-next').on('click', ()=>loadNext())
-  $('#js-previous').on('click', ()=>loadPrevious())
+function addIndexEventListeners(){
+  
   $('.js-user-link').on('click', (tag)=>loadIndexedRecipes(tag))
     // add event listener to recipe links
   // $('.js-user-recipe-link').on('click', (tag)=>loadShowRecipe(tag))
+}
+
+function addShowEventListeners(){
+  $('#js-next').on('click', ()=>loadNext())
+  $('#js-previous').on('click', ()=>loadPrevious())
 }
 
  // Event Handlers
@@ -78,7 +83,7 @@ function displayShowRecipe(res){
   let recipeShowTemplate = Handlebars.compile(recipeShowString);
   $('#recipe-body').html(recipeShowTemplate({recipe: showRecipe}))
   updateEditLink(showRecipe)
-  addRecipeEventListeners()
+  addShowEventListeners()
 }
 
 // Helper Functions
