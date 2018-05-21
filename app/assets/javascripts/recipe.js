@@ -57,10 +57,10 @@ function loadNext(){
   $.get(`${userUrl}/${currentId}`,{ new_recipe_id: currentId+1 },null,'json')
     .done(displayShowRecipe)  
 }
-
-function displayIngredientRows(){
-  // Handlebars.registerHelper('list_ingredient', function())
-}
+// NOT IN USE
+// function displayIngredientRows(){
+//   // Handlebars.registerHelper('list_ingredient', function())
+// }
 
 function loadPrevious(){
   clearComments()
