@@ -83,6 +83,7 @@ function displayShowRecipe(res){
   let recipeShowTemplate = Handlebars.compile(recipeShowString);
   $('#recipe-body').html(recipeShowTemplate({recipe: showRecipe}))
   updateEditLink(showRecipe)
+  $("#js-edit-link")
   addShowEventListeners()
 }
 
