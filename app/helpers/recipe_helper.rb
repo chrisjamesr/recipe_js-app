@@ -12,7 +12,7 @@ module RecipeHelper
 
   def show_edit_link
     if current_user == User.find(params[:user_id])
-      link_to "Edit Recipe", edit_user_recipe_path(current_user, Recipe.find(params[:id]))
+      link_to "Edit Recipe", edit_user_recipe_path(current_user, Recipe.find(params[:id])), id: "js-edit-link"
       # button_to "Delete", user_recipe_path(current_user, Recipe.find(params[:id])), :method => "delete"
     end
   end
