@@ -24,4 +24,4 @@
 
 .env
 
-Gemfile.lock
+# Gemfile.lock
