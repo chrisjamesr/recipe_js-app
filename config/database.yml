@@ -1,6 +1,6 @@
 development:
-  adapter: sqlite3
-  database: db/development.sqlite
+  adapter: postgresql
+  database: recipe_app_dev
   host: localhost
   pool: 5
   timeout: 5000
@@ -8,14 +8,14 @@ development:
 production:
   # url: <%= ENV['DATABASE_URL'] %>
   adapter: postgresql
-  database: birds
+  database: recipe_app
   host: localhost 
   pool: 5
   timeout: 5000
 
 test:
-  adapter: postgresql
-  database: birds
+  adapter: sqlite3
+  database: recipe_app_test
   host: localhost 
   pool: 5
   timeout: 5000
