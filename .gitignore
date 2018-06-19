@@ -23,5 +23,6 @@
 .byebug_history
 
 .env
-
-# Gemfile.lock
+.DS_Store
+db/development.sqlite
+recipe_app_test
