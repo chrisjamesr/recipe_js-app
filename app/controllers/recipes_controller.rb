@@ -17,7 +17,6 @@ class RecipesController < ApplicationController
   end
 
   def create
-    binding.pry
     @recipe = Recipe.new(recipe_params)
     if @recipe.save
       redirect_to user_recipe_path(@recipe.user, @recipe), {:notice => "Success! New Recipe Added."}
@@ -29,7 +28,6 @@ class RecipesController < ApplicationController
   end
   
   def index
-    # binding.pry
     if params[:user_id] && params[:order].present?      
       redirect_to "/recipes/#{params[:order]}"
     elsif params[:user_id]
