@@ -3,7 +3,7 @@
   <%= tag.div :class =>"navbar-header" do %>
     <% if current_user %>
 
-      <%= content_tag(:span, current_user.name, :class => "navbar-brand") %>  
+      <%= content_tag(:span, current_user.username, :class => "navbar-brand") %>  
       <%= link_to "Add A Recipe", new_user_recipe_path(current_user), :class => "navbar-brand" %>     
       <%= link_to "My Recipes", user_recipes_path(current_user), :class => "navbar-brand" %>   
       <%= link_to "All Recipes", recipes_path, :class => "navbar-brand" %>
