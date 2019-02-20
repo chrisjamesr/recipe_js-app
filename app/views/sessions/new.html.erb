@@ -3,7 +3,7 @@
 
 <%= form_for :user, :url => login_path, :method => "post", :html => {:class => "form-group"} do |f| %>
   <div class="form-group">
-    <%= f.text_field :name, :placeholder => (if_flash(:name) || "Enter Your Name"), :size => 30 %>
+    <%= f.text_field :email, :placeholder => (if_flash(:email) || "Enter Your Email"), :size => 30 %>
   </div>
   <div class="form-group">
      <%= f.password_field :password, :placeholder => (if_flash(:password) || "Enter Your Password"), :size => 30 %>
