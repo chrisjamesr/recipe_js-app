@@ -20,4 +20,8 @@ class User < ApplicationRecord
       :password => Password.pronounceable(10)) 
   end
 
+  def username
+    @username = self.email.match(/.+(?=@)/)[0]    
+  end 
+
 end
