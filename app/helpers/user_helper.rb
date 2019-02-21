@@ -12,7 +12,7 @@ module UserHelper
     if nested_route? && !current_user_path?
       tag.h1 do
         @user = User.find_by(:id => request.parameters[:user_id]) 
-        @user.name
+        @user.username
       end 
     end
   end
