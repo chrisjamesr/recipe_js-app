@@ -9,8 +9,8 @@ class SessionsController < ApplicationController
       @user = User.login_from_omniauth(auth)
       set_session
       redirect_to user_recipes_path(@user), :notice => "Welcome #{@user.name.capitalize}"
-    elsif params[:user][:name].present? && params[:user][:password].present? 
-      @user = User.find_by(:name => params[:user][:name])
+    elsif params[:user][:email].present? && params[:user][:password].present? 
+      @user = User.find_by(:email => params[:user][:email])
       if @user && @user.authenticate(params[:user][:password])
         set_session
         redirect_to user_recipes_path(@user), :notice => "Welcome #{@user.name.capitalize}"
@@ -37,12 +37,13 @@ class SessionsController < ApplicationController
 
   def set_errors(params)
 
-    flash.now[:alert] = {:name => "Name Required"} if params[:user][:name].nil?
-    flash.now[:alert] = {:name => "User Not Found"} if User.find_by(:name => params[:user][:name]).nil?
+    flash.now[:alert] = {:email => "Email Required"} if params[:user][:email].nil?
+    flash.now[:alert] = {:email => "User Not Found"} if User.find_by(:email => params[:user][:email]).nil?
     flash.now[:alert] = {:password => "Password Required"} if params[:user][:password].nil?
     flash.now[:alert] = {:password => "Password incorrect"} if @user && !@user.authenticate(params[:user][:password])
 
   end
+
 
 
 end
