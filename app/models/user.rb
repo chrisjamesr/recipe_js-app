@@ -2,8 +2,8 @@ class User < ApplicationRecord
   has_many :recipes
 
   has_secure_password
-  validates :name, presence: true, allow_blank: false
-  validates :name, uniqueness: {case_sensitive: false}
+  validates :email, presence: true, allow_blank: false
+  validates :email, uniqueness: {case_sensitive: false}
   validates :password, presence: true, length: { in: 6..20 }
 
   def self.login_from_omniauth(auth)
@@ -16,7 +16,7 @@ class User < ApplicationRecord
 
   def self.create_from_omniauth(auth)
     create(:email => auth[:info][:email],
-      :name => auth[:info][:name],
+      :email => auth[:info][:email],
       :password => Password.pronounceable(10)) 
   end
 
