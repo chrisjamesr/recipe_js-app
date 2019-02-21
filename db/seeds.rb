@@ -8,6 +8,8 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 FOOD_CATEGORIES = ['Appetizers', 'Desserts', 'Holiday Foods', 'Meat', 'Entres', 'Vegeterian', 'Vegan', 'Breakfast']
 PREP_DIRECTIONS =['Chopped', 'Diced', 'Grated', 'Sliced']
+FOOD_MEASUREMENTS = ['1 tsp', ' 1 tbsp', '1 oz', '1 cup']
+qty = -> measure {"#{(rand*10).floor} #{measure}"}
 
 FOOD_CATEGORIES.each do |category|
     Category.create(name: category)
@@ -15,33 +17,36 @@ end
 
 10.times do 
   User.create(
-    name: Faker::Name.name,
-    email: Faker::Internet.email,
-    password: Faker::Number.number(8)
+    name: FFaker::Name.name,
+    email: FFaker::Internet.safe_email,
+    password: FFaker::Internet.password
   )
 end
 
 4.times do
   User.all.each do |user|
     user.recipes.create(
-      :title => Faker::Food.dish,
-      :description => Faker::Food.description,
-      :time => Faker::Number.between(1, 90),
-      :directions => Faker::TheFreshPrinceOfBelAir.quote 
+      :title => FFaker::Food.dish,
+      :description => FFaker::Food.description,
+      :time => FFaker::Number.between(1, 90),
+      :directions => FFaker::TheFreshPrinceOfBelAir.quote 
       )   
   end
 end
 
-20.times do
+10.times do
   Ingredient.create(
-    :name => Faker::Food.ingredient
+    :name => Ffaker::Food.ingredient
+    )
+  Ingredient.create(
+    :name => FFaker::Food.herb_or_spice
     )
 end
 60.times do 
   RecipeIngredient.create(
     :recipe_id => Recipe.all.sample.id,
     :ingredient_id => Ingredient.all.sample.id,
-    :quantity => Faker::Food.measurement,
+    :quantity => qty.call(FOOD_MEASUREMENTS.sample)
     :preparation => PREP_DIRECTIONS.sample
     )
 end
