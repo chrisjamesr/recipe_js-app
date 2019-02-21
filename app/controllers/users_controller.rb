@@ -15,7 +15,12 @@ class UsersController < ApplicationController
   end
 
   def index
-    render json: User.all, response: 200
+    # render json: User.all, response: 200
+    # respond_to do |format|
+    #   format.html { render layout: false}
+    #   format.json { render json: User.all,  status: 200}
+    # end
+    redirect_to recipes_path
   end
   
   def show
