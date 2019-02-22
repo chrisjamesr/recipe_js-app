@@ -27,6 +27,6 @@ module RecipeHelper
   end
 
   def no_recipes 
-    content_tag(:div, "No Recipes", :class => "no-recipes")
+    content_tag(:div, "You Have No Recipes", :class => "no-recipes")
   end
 end  # End of
