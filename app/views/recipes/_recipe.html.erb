@@ -4,7 +4,8 @@
      <div class="category-tag">
       <%= render :partial => "categories/categories", :collection => recipe.categories, :as => :category %>
     </div>
-    <h6 class="card-subtitle mb-2 text-muted">Submitted by <%= link_to recipe.user.username, user_recipes_path(recipe.user),class: "js-user-link" %></h6>
+    <!-- problem spot!!! -->
+    <h6 class="card-subtitle mb-2 text-muted">Submitted by <%= link_to "#{recipe.user.username}" || "", user_recipes_path(recipe.user),class: "js-user-link" %></h6>
     <em>Approximate Cook Time: <%= recipe.time %> Min</em><br>
     <%= recipe.description %>
    
