@@ -8,12 +8,12 @@ class SessionsController < ApplicationController
     if auth.present?
       @user = User.login_from_omniauth(auth)
       set_session
-      redirect_to user_recipes_path(@user), :notice => "Welcome #{@user.name.capitalize}"
+      redirect_to user_recipes_path(@user), :notice => "Welcome #{@user.username.capitalize}"
     elsif params[:user][:email].present? && params[:user][:password].present? 
       @user = User.find_by(:email => params[:user][:email])
       if @user && @user.authenticate(params[:user][:password])
         set_session
-        redirect_to user_recipes_path(@user), :notice => "Welcome #{@user.name.capitalize}"
+        redirect_to user_recipes_path(@user), :notice => "Welcome #{@user.username.capitalize}"
       else
         set_errors(params)
         render :new
