@@ -28,16 +28,14 @@ class RecipesController < ApplicationController
   end
   
   def index
-    # binding.pry
-    if params[:user_id] && params[:order].present?      
-      redirect_to "/recipes/#{params[:order]}"
-    elsif params[:user_id]
-      @recipes = Recipe.by_user(params[:user_id]).filter_options(session[:filter_params]) 
-    elsif params[:order].present?      
-      redirect_to "/recipes/#{params[:order]}"
-    else
-      @recipes = Recipe.all & Recipe.filter_options(session[:filter_params])
+    @recipes = Recipe.all
+    if params[:user_id].present? 
+      @recipes = @recipes & Recipe.by_user(params[:user_id])
     end
+    if params[:order].present?  
+      @recipes = @recipes & Recipe.send("#{params[:order]}")
+    end
+    @recipes = @recipes & Recipe.filter_options(session[:filter_params])
     respond_to do |format|
       format.html { render :index }
       format.json { render json: @recipes, status: 200}
@@ -69,25 +67,25 @@ class RecipesController < ApplicationController
   def destroy
   end
     
-  def newest
-    @recipes = Recipe.newest & Recipe.filter_options(session[:filter_params])
-    render :index
-  end
+  # def newest
+  #   @recipes = Recipe.newest & Recipe.filter_options(session[:filter_params])
+  #   render :index
+  # end
 
-  def oldest
-    @recipes = Recipe.oldest & Recipe.filter_options(session[:filter_params])
-    render :index
-  end
+  # def oldest
+  #   @recipes = Recipe.oldest & Recipe.filter_options(session[:filter_params])
+  #   render :index
+  # end
 
-  def shortest
-    @recipes = Recipe.shortest & Recipe.filter_options(session[:filter_params])
-    render :index
-  end
+  # def shortest
+  #   @recipes = Recipe.shortest & Recipe.filter_options(session[:filter_params])
+  #   render :index
+  # end
 
-  def longest
-    @recipes = Recipe.longest & Recipe.filter_options(session[:filter_params])
-    render :index
-  end
+  # def longest
+  #   @recipes = Recipe.longest & Recipe.filter_options(session[:filter_params])
+  #   render :index
+  # end
   
   private
     def recipe_params
