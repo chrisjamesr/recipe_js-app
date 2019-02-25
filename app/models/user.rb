@@ -15,7 +15,7 @@ class User < ApplicationRecord
   end
 
   def self.create_from_omniauth(auth)
-    create(:email => auth[:info][:email],
+    create(
       :email => auth[:info][:email],
       :password => Password.pronounceable(10)) 
   end
