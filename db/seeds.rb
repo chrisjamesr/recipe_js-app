@@ -27,14 +27,20 @@ end
       :title => Faker::Food.dish,
       :description => Faker::Food.description,
       :time => Faker::Number.between(1, 90),
-      :directions => Faker::TheFreshPrinceOfBelAir.quote 
+      :directions => Faker::Lorem.paragraph(1)
       )   
   end
 end
 
-20.times do
+10.times do
   Ingredient.create(
     :name => Faker::Food.ingredient
+    )
+  Ingredient.create(
+    :name => Faker::Food.spice
+    )
+  Ingredient.create(
+    :name => Faker::Food.vegetables
     )
 end
 60.times do 
