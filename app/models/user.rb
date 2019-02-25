@@ -21,7 +21,7 @@ class User < ApplicationRecord
   end
 
   def username
-    @username = self.email.match(/.+(?=@)/)[0]    
+    @username = email.match(/.+(?=@)/)[0]    
   end 
 
 end
